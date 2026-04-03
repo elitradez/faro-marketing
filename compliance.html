@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faro — Compliance</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --ink:#0a0a0d;
+  --ink2:#13131a;
+  --off:#f5f3ef;
+  --offwarm:#ede9e3;
+  --rule:rgba(10,10,13,0.1);
+  --rule2:rgba(10,10,13,0.06);
+  --muted:#9a9690;
+  --muted2:#6b6860;
+  --text:#2a2825;
+  --p:#7c3aed;
+}
+
+body{
+  background:var(--off);
+  color:var(--text);
+  font-family:'DM Sans',-apple-system,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 56px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,243,239,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--rule);
+}
+
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:400;
+  color:var(--ink);text-decoration:none;
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+
+.nav-back{
+  font-size:13px;font-weight:400;
+  color:var(--muted2);text-decoration:none;
+  transition:color 0.15s;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-back:hover{color:var(--ink);}
+
+/* HEADER */
+.page-header{
+  padding:120px 56px 72px;
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:end;
+}
+
+.header-kicker{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:10px;
+}
+.header-kicker::before{content:'';display:inline-block;width:24px;height:1px;background:var(--muted);}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(44px,5.5vw,68px);
+  font-weight:300;
+  line-height:1.02;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+
+h1 em{font-style:italic;}
+
+.header-note{
+  font-size:15px;color:var(--muted2);
+  font-weight:300;line-height:1.75;
+  align-self:end;
+}
+
+/* COMPLIANCE ITEMS */
+.compliance-section{
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns:280px 1fr;
+}
+
+.comp-left{
+  padding:56px 40px;
+  border-right:1px solid var(--rule);
+  position:sticky;top:60px;
+  align-self:start;
+}
+
+.comp-tag{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+
+.comp-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:400;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+  line-height:1.2;
+  margin-bottom:16px;
+}
+
+.comp-status{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+}
+
+.status-dot{
+  width:6px;height:6px;border-radius:50%;
+}
+
+.status-ready .status-dot{background:#22c55e;}
+.status-ready{color:#166534;}
+.status-progress .status-dot{background:#f59e0b;}
+.status-progress{color:#92400e;}
+
+.comp-right{
+  padding:56px 56px;
+}
+
+.comp-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:400;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+  margin-bottom:16px;
+  line-height:1.3;
+}
+
+.comp-body{
+  font-size:14px;color:var(--muted2);
+  font-weight:300;line-height:1.85;
+  margin-bottom:32px;
+  max-width:560px;
+}
+
+.comp-details{
+  display:flex;flex-direction:column;gap:0;
+  border:1px solid var(--rule);
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.comp-detail-row{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  border-bottom:1px solid var(--rule);
+}
+.comp-detail-row:last-child{border-bottom:none;}
+
+.comp-detail-label{
+  padding:14px 18px;
+  font-size:11px;font-weight:500;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--muted);
+  border-right:1px solid var(--rule);
+  background:var(--offwarm);
+}
+
+.comp-detail-value{
+  padding:14px 18px;
+  font-size:13px;color:var(--text);
+  font-weight:300;line-height:1.6;
+}
+
+/* CONTACT STRIP */
+.contact-strip{
+  background:var(--ink);
+  padding:72px 56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:48px;
+}
+
+.cs-left{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(24px,3vw,36px);
+  font-weight:300;font-style:italic;
+  color:var(--off);
+  line-height:1.2;
+  letter-spacing:-0.01em;
+}
+
+.cs-right{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
+
+.btn-light{
+  display:inline-flex;align-items:center;
+  background:var(--off);color:var(--ink);
+  padding:13px 26px;border-radius:5px;
+  font-size:14px;font-weight:500;
+  text-decoration:none;
+  transition:background 0.15s,transform 0.12s;
+}
+.btn-light:hover{background:#fff;transform:translateY(-2px);}
+
+.cs-email{
+  font-size:12px;color:rgba(245,243,239,0.35);
+  text-decoration:none;letter-spacing:0.04em;
+  transition:color 0.15s;
+}
+.cs-email:hover{color:rgba(245,243,239,0.7);}
+
+/* FOOTER */
+footer{
+  background:var(--ink);
+  border-top:1px solid rgba(245,243,239,0.07);
+  padding:20px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:300;
+  color:rgba(245,243,239,0.3);
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+
+.footer-copy{font-size:11px;color:rgba(245,243,239,0.22);letter-spacing:0.04em;}
+
+/* ANIMATIONS */
+@keyframes fadeup{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  nav{padding:0 24px;}
+  .page-header{grid-template-columns:1fr;padding:100px 24px 48px;gap:24px;}
+  .compliance-section{grid-template-columns:1fr;}
+  .comp-left{position:static;border-right:none;border-bottom:1px solid var(--rule);padding:36px 24px 28px;}
+  .comp-right{padding:32px 24px 48px;}
+  .comp-detail-row{grid-template-columns:1fr;}
+  .comp-detail-label{border-right:none;border-bottom:1px solid var(--rule);}
+  .contact-strip{flex-direction:column;padding:48px 24px;align-items:flex-start;}
+  .cs-right{align-items:flex-start;}
+  footer{padding:18px 24px;flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Faro</a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div>
+    <div class="header-kicker">Compliance & security</div>
+    <h1>Built to meet<br>university <em>standards.</em></h1>
+  </div>
+  <p class="header-note">Universities have real legal obligations when evaluating third-party software. Faro is built from the ground up to meet those requirements — so your IT and procurement teams aren't the bottleneck.</p>
+</div>
+
+<!-- ADA / WCAG -->
+<div class="compliance-section">
+  <div class="comp-left reveal">
+    <div class="comp-tag">Federal law</div>
+    <div class="comp-name">ADA / WCAG 2.1 AA</div>
+    <div class="comp-status status-ready">
+      <div class="status-dot"></div>
+      Compliant
+    </div>
+  </div>
+  <div class="comp-right reveal d1">
+    <div class="comp-headline">Accessible to every student and staff member, by law.</div>
+    <p class="comp-body">The DOJ finalized a rule under Title II of the ADA requiring all public universities to ensure their third-party software meets WCAG 2.1 Level AA standards by April 24, 2026. This means universities are legally responsible for verifying that every vendor they deploy meets the standard — including Faro. We're built to meet it.</p>
+    <div class="comp-details">
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Standard</div>
+        <div class="comp-detail-value">WCAG 2.1 Level AA — the DOJ-mandated benchmark for public universities</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Keyboard nav</div>
+        <div class="comp-detail-value">All features fully operable without a mouse</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Screen readers</div>
+        <div class="comp-detail-value">ARIA labels on all interactive elements, semantic HTML throughout</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Color contrast</div>
+        <div class="comp-detail-value">4.5:1 minimum ratio for all text — audited and passing</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Alt text</div>
+        <div class="comp-detail-value">Item photos auto-populated with AI-generated descriptions at upload</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Documentation</div>
+        <div class="comp-detail-value">Accessibility statement available at getfaro.com/accessibility</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FERPA -->
+<div class="compliance-section">
+  <div class="comp-left reveal">
+    <div class="comp-tag">Student privacy</div>
+    <div class="comp-name">FERPA</div>
+    <div class="comp-status status-ready">
+      <div class="status-dot"></div>
+      Compliant
+    </div>
+  </div>
+  <div class="comp-right reveal d1">
+    <div class="comp-headline">Student data handled with care — and with the law in mind.</div>
+    <p class="comp-body">FERPA governs the privacy of student education records. When Faro collects a student's name, email, or ID number during a claim, that data is subject to FERPA protections. We collect only what's necessary to return a lost item, keep it isolated per university, and never share it across institutions.</p>
+    <div class="comp-details">
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Data collected</div>
+        <div class="comp-detail-value">Name, email, student ID, phone — only what's needed to verify pickup</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Data isolation</div>
+        <div class="comp-detail-value">Each university's data is fully scoped — never visible across institutions</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Purpose limitation</div>
+        <div class="comp-detail-value">Collected solely for lost item recovery — not shared, sold, or used elsewhere</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Retention</div>
+        <div class="comp-detail-value">Claim records retained per institution's policy — deletion available on request</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Documentation</div>
+        <div class="comp-detail-value">FERPA data handling statement and DPA template available on request</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HECVAT -->
+<div class="compliance-section">
+  <div class="comp-left reveal">
+    <div class="comp-tag">Vendor assessment</div>
+    <div class="comp-name">HECVAT 4</div>
+    <div class="comp-status status-progress">
+      <div class="status-dot"></div>
+      In progress
+    </div>
+  </div>
+  <div class="comp-right reveal d1">
+    <div class="comp-headline">The standard questionnaire — completed proactively.</div>
+    <p class="comp-body">The Higher Education Community Vendor Assessment Toolkit is the security questionnaire used by hundreds of universities to evaluate third-party vendors. Most vendors wait to be asked. We're completing it proactively so that when your IT team asks for it, it's ready — and your procurement process doesn't stall.</p>
+    <div class="comp-details">
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Version</div>
+        <div class="comp-detail-value">HECVAT 4.1.5 — the current version, released February 2025</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Sections covered</div>
+        <div class="comp-detail-value">Organization, Product, Infrastructure, IT Accessibility, AI, Privacy</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Infrastructure</div>
+        <div class="comp-detail-value">Answered using Vercel and Supabase SOC 2 documentation</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">AI section</div>
+        <div class="comp-detail-value">Answered using Anthropic's published responsible AI and data handling policies</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Availability</div>
+        <div class="comp-detail-value">Shared with any institution upon request — completed once, valid for all</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DATA SECURITY -->
+<div class="compliance-section" style="border-bottom:none;">
+  <div class="comp-left reveal">
+    <div class="comp-tag">Infrastructure</div>
+    <div class="comp-name">Data security</div>
+    <div class="comp-status status-ready">
+      <div class="status-dot"></div>
+      SOC 2 infrastructure
+    </div>
+  </div>
+  <div class="comp-right reveal d1">
+    <div class="comp-headline">Enterprise-grade infrastructure. No servers to manage.</div>
+    <p class="comp-body">Faro runs entirely on Vercel and Supabase — both SOC 2 Type II certified cloud providers. We don't host any servers ourselves, which means your institution isn't taking on infrastructure risk by deploying Faro. All data is encrypted. All university data is isolated.</p>
+    <div class="comp-details">
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Hosting</div>
+        <div class="comp-detail-value">Vercel (SOC 2 Type II) — globally distributed, enterprise-grade</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Database</div>
+        <div class="comp-detail-value">Supabase on AWS us-east-1 (SOC 2 Type II) — row-level security enabled</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Encryption</div>
+        <div class="comp-detail-value">All data encrypted at rest and in transit via TLS 1.2+</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Data isolation</div>
+        <div class="comp-detail-value">University-scoped access — no institution can access another's data</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Incident response</div>
+        <div class="comp-detail-value">Documented plan — affected universities notified within 72 hours of any breach</div>
+      </div>
+      <div class="comp-detail-row">
+        <div class="comp-detail-label">Documentation</div>
+        <div class="comp-detail-value">DPA template, incident response plan, and infrastructure docs available on request</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip reveal">
+  <div class="cs-left">Questions about<br>compliance?</div>
+  <div class="cs-right">
+    <a href="mailto:eli@getfaro.com?subject=Compliance inquiry" class="btn-light">Get in touch →</a>
+    <a href="mailto:eli@getfaro.com" class="cs-email">eli@getfaro.com</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Faro</div>
+  <div class="footer-copy">© 2026 Faro · getfaro.com</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'),i*55);
+  });
+},{threshold:0.06,rootMargin:'0px 0px -16px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

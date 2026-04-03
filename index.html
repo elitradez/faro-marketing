@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faro — Campus Lost & Found</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --ink:#0a0a0d;
+  --off:#f5f3ef;
+  --offwarm:#ede9e3;
+  --rule:rgba(10,10,13,0.1);
+  --rule2:rgba(10,10,13,0.06);
+  --muted:#9a9690;
+  --muted2:#6b6860;
+  --text:#2a2825;
+  --p:#7c3aed;
+}
+
+body{
+  background:var(--off);
+  color:var(--text);
+  font-family:'DM Sans',-apple-system,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 56px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(245,243,239,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--rule);
+}
+
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:400;
+  color:var(--ink);text-decoration:none;
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+
+.nav-right{display:flex;align-items:center;gap:32px;}
+
+.nav-link{
+  font-size:13px;font-weight:400;
+  color:var(--muted2);text-decoration:none;
+  transition:color 0.15s;
+}
+.nav-link:hover{color:var(--ink);}
+
+.nav-btn{
+  background:var(--ink);color:var(--off);
+  padding:8px 20px;border-radius:5px;
+  font-size:13px;font-weight:500;
+  text-decoration:none;
+  transition:background 0.15s,transform 0.12s;
+}
+.nav-btn:hover{background:var(--p);transform:translateY(-1px);}
+
+/* HERO */
+.hero{
+  padding:140px 56px 96px;
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:end;
+  min-height:100vh;
+  position:relative;
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  top:100px;bottom:0;left:50%;
+  width:1px;background:var(--rule2);
+}
+
+.hero-left{
+  animation:up 0.7s ease both;
+}
+
+.hero-kicker{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:28px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-kicker::before{
+  content:'';width:24px;height:1px;
+  background:var(--muted);display:inline-block;
+}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(44px,5.5vw,72px);
+  font-weight:300;
+  line-height:1.05;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+
+h1 em{font-style:italic;font-weight:300;}
+
+.hero-right{
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  animation:up 0.7s 0.1s ease both;
+}
+
+.hero-mission{
+  font-size:17px;
+  color:var(--muted2);
+  font-weight:300;
+  line-height:1.75;
+  margin-bottom:40px;
+}
+
+.hero-mission strong{color:var(--text);font-weight:400;}
+
+.hero-actions{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:52px;
+}
+
+.btn-dark{
+  background:var(--ink);color:var(--off);
+  padding:13px 26px;border-radius:5px;
+  font-size:14px;font-weight:500;
+  text-decoration:none;
+  transition:background 0.15s,transform 0.12s;
+}
+.btn-dark:hover{background:var(--p);transform:translateY(-2px);}
+
+.btn-ghost{
+  font-size:14px;font-weight:400;
+  color:var(--muted2);text-decoration:none;
+  border-bottom:1px solid var(--rule);
+  padding-bottom:2px;
+  transition:color 0.15s,border-color 0.15s;
+}
+.btn-ghost:hover{color:var(--ink);border-color:var(--muted2);}
+
+.stat-block{
+  border-top:1px solid var(--rule);
+  padding-top:28px;
+}
+
+.stat-number{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:300;font-style:italic;
+  color:var(--ink);line-height:1;margin-bottom:6px;
+}
+
+.stat-caption{
+  font-size:12px;font-weight:400;
+  color:var(--muted);
+  letter-spacing:0.04em;text-transform:uppercase;
+}
+
+/* MISSION STRIP */
+.mission-strip{
+  padding:64px 56px;
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:80px;
+}
+
+.mission-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;flex-shrink:0;
+}
+
+.mission-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(20px,2.5vw,28px);
+  font-weight:300;font-style:italic;
+  color:var(--ink);line-height:1.5;
+  letter-spacing:-0.01em;
+}
+
+/* SERVICES */
+.services{border-bottom:1px solid var(--rule);}
+
+.services-header{
+  padding:52px 56px 22px;
+  display:flex;align-items:baseline;
+  justify-content:space-between;
+  border-bottom:1px solid var(--rule);
+}
+
+.services-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,3vw,38px);
+  font-weight:300;color:var(--ink);
+  letter-spacing:-0.02em;
+}
+
+.services-count{
+  font-size:11px;font-weight:400;
+  color:var(--muted);letter-spacing:0.06em;
+}
+
+.service-row{
+  display:grid;
+  grid-template-columns:80px 1fr 1fr;
+  border-bottom:1px solid var(--rule);
+  transition:background 0.15s;
+}
+.service-row:last-child{border-bottom:none;}
+.service-row:hover{background:var(--offwarm);}
+
+.service-num{
+  padding:36px 24px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;font-style:italic;font-weight:300;
+  color:var(--muted);
+  border-right:1px solid var(--rule);
+  padding-top:38px;
+}
+
+.service-name{
+  padding:36px 40px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:400;
+  color:var(--ink);
+  border-right:1px solid var(--rule);
+  letter-spacing:-0.01em;line-height:1.3;
+}
+
+.service-desc{
+  padding:36px 40px;
+  font-size:14px;font-weight:300;
+  color:var(--muted2);line-height:1.75;
+}
+
+/* COMPLIANCE TEASER */
+.compliance-teaser{
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+}
+
+.comp-left{
+  padding:72px 56px;
+  border-right:1px solid var(--rule);
+}
+
+.comp-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;
+}
+
+.comp-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,3vw,40px);
+  font-weight:300;color:var(--ink);
+  letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:16px;
+}
+
+.comp-body{
+  font-size:14px;color:var(--muted2);
+  font-weight:300;line-height:1.8;
+  max-width:380px;
+}
+
+.comp-right{padding:72px 56px;}
+
+.comp-tags{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom:36px;
+}
+
+.comp-tag{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--muted2);
+  background:var(--offwarm);
+  border:1px solid var(--rule);
+  padding:7px 14px;border-radius:4px;
+}
+
+/* CONTACT */
+.contact{
+  background:var(--ink);
+  padding:96px 56px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+
+.contact-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(34px,4vw,54px);
+  font-weight:300;font-style:italic;
+  color:var(--off);
+  line-height:1.08;letter-spacing:-0.02em;
+  margin-bottom:18px;
+}
+
+.contact-sub{
+  font-size:15px;font-weight:300;
+  color:rgba(245,243,239,0.42);
+  line-height:1.75;
+}
+
+.contact-right{
+  display:flex;flex-direction:column;gap:14px;
+}
+
+.btn-light{
+  display:inline-flex;align-items:center;
+  justify-content:center;
+  background:var(--off);color:var(--ink);
+  padding:16px 32px;border-radius:5px;
+  font-size:14px;font-weight:500;
+  text-decoration:none;
+  transition:background 0.15s,transform 0.12s;
+  text-align:center;
+}
+.btn-light:hover{background:#fff;transform:translateY(-2px);}
+
+.contact-email{
+  display:block;text-align:center;
+  font-size:13px;font-weight:300;
+  color:rgba(245,243,239,0.35);
+  text-decoration:none;letter-spacing:0.04em;
+  transition:color 0.15s;padding:6px 0;
+}
+.contact-email:hover{color:rgba(245,243,239,0.7);}
+
+/* FOOTER */
+footer{
+  background:var(--ink);
+  border-top:1px solid rgba(245,243,239,0.07);
+  padding:20px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:300;
+  color:rgba(245,243,239,0.28);
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+
+.footer-copy{font-size:11px;color:rgba(245,243,239,0.2);letter-spacing:0.04em;}
+
+/* ANIM */
+@keyframes up{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  nav{padding:0 24px;}
+  .nav-link{display:none;}
+  .hero{
+    grid-template-columns:1fr;
+    padding:110px 24px 64px;
+    min-height:auto;gap:40px;
+  }
+  .hero::after{display:none;}
+  .mission-strip{flex-direction:column;gap:16px;padding:48px 24px;}
+  .services-header{padding:36px 24px 20px;}
+  .service-row{grid-template-columns:48px 1fr;}
+  .service-name{border-right:none;padding:24px 20px 0;}
+  .service-desc{grid-column:2;padding:8px 20px 24px;}
+  .service-num{padding:24px 14px;}
+  .compliance-teaser{grid-template-columns:1fr;}
+  .comp-left{border-right:none;border-bottom:1px solid var(--rule);padding:48px 24px 36px;}
+  .comp-right{padding:36px 24px 48px;}
+  .contact{grid-template-columns:1fr;gap:40px;padding:64px 24px;}
+  .contact-right{align-items:stretch;}
+  footer{padding:18px 24px;flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Faro</a>
+  <div class="nav-right">
+    <a href="#services" class="nav-link">What we do</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#contact" class="nav-btn">Get a demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Campus lost &amp; found</div>
+    <h1>Lost and found<br>systems for<br><em>universities.</em></h1>
+  </div>
+  <div class="hero-right">
+    <p class="hero-mission">
+      Faro is <strong>lost and found infrastructure built for universities.</strong> We make it easy for staff to log found items and for students to get their things back — without the clipboard, the spreadsheet, or the phone tag.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-dark">Request a demo</a>
+      <a href="#services" class="btn-ghost">See what we do</a>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">30s</div>
+      <div class="stat-caption">Average time for staff to log a found item</div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION STRIP -->
+<div class="mission-strip reveal">
+  <div class="mission-label">Our mission</div>
+  <div class="mission-text">"Every campus loses things. Most have no real system for getting them back. Faro fixes that — built specifically for how universities actually work."</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <div class="services-title">What we provide</div>
+    <div class="services-count">05 services</div>
+  </div>
+
+  <div class="service-row reveal">
+    <div class="service-num">01</div>
+    <div class="service-name">Staff dashboard</div>
+    <div class="service-desc">A simple web platform for front-desk staff to log found items with a photo, AI-generated description, and location. No training needed — most staff are logging items within minutes of getting access.</div>
+  </div>
+
+  <div class="service-row reveal d1">
+    <div class="service-num">02</div>
+    <div class="service-name">Student search &amp; claims</div>
+    <div class="service-desc">Students describe what they lost in plain language and search the live inventory. High-value items stay blurred until a student can verify ownership — keeping the process honest without adding friction for staff.</div>
+  </div>
+
+  <div class="service-row reveal d2">
+    <div class="service-num">03</div>
+    <div class="service-name">SMS alerts</div>
+    <div class="service-desc">Students register what they lost. The moment a matching item gets logged, they get a text. No need to keep checking back — the system does the follow-up automatically.</div>
+  </div>
+
+  <div class="service-row reveal">
+    <div class="service-num">04</div>
+    <div class="service-name">Verified pickup</div>
+    <div class="service-desc">Every claim requires student ID and a secure PIN before anything gets handed over. A full audit trail is kept from the moment an item is logged to the moment it's returned.</div>
+  </div>
+
+  <div class="service-row reveal d1">
+    <div class="service-num">05</div>
+    <div class="service-name">Portal integration</div>
+    <div class="service-desc">Faro works as a standalone platform or integrates into your existing campus portal. Built to slot into whatever your university already has — not replace it.</div>
+  </div>
+</section>
+
+<!-- COMPLIANCE TEASER -->
+<section class="compliance-teaser" id="compliance">
+  <div class="comp-left reveal">
+    <div class="comp-label">Compliance</div>
+    <div class="comp-title">Built to meet<br>university standards.</div>
+    <p class="comp-body">Universities have real legal obligations when it comes to the software they deploy. Faro is built to meet those standards from day one — ADA, FERPA, HECVAT, and more.</p>
+  </div>
+  <div class="comp-right reveal d1">
+    <div class="comp-tags">
+      <span class="comp-tag">ADA / WCAG 2.1 AA</span>
+      <span class="comp-tag">FERPA</span>
+      <span class="comp-tag">HECVAT</span>
+      <span class="comp-tag">SOC 2 Infrastructure</span>
+    </div>
+    <a href="compliance.html" class="btn-dark" style="display:inline-flex;align-items:center;gap:8px;">View compliance details →</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <div class="contact-title">Ready to bring<br>Faro to your<br>campus?</div>
+    <p class="contact-sub">We're working with universities now. Reach out to schedule a demo or just ask questions — we'll get back to you the same day.</p>
+  </div>
+  <div class="contact-right reveal d1">
+    <a href="mailto:ebunting07@gmail.com?subject=Faro — Getting in touch" class="btn-light">Contact us →</a>
+    <a href="mailto:ebunting07@gmail.com" class="contact-email">ebunting07@gmail.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Faro</div>
+  <div class="footer-copy">© 2026 Faro · getfaro.com</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'),i*55);
+  });
+},{threshold:0.06,rootMargin:'0px 0px -16px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+
+</body>
+</html>
