@@ -91,22 +91,33 @@ nav{
   content:'';
   position:absolute;
   top:0;right:0;bottom:0;
-  width:50%;
+  width:52%;
   background:var(--off);
-  clip-path:polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+  clip-path:polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
   z-index:0;
 }
 
 /* Faint cross-hatch on right panel */
 .hero-grid{
   position:absolute;
-  top:0;right:0;bottom:0;width:50%;
+  top:0;right:0;bottom:0;width:52%;
   z-index:1;pointer-events:none;
   background-image:
     linear-gradient(var(--rule2) 1px, transparent 1px),
     linear-gradient(90deg, var(--rule2) 1px, transparent 1px);
-  background-size:40px 40px;
-  clip-path:polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+  background-size:36px 36px;
+  clip-path:polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* Lighthouse watermark */
+.hero-lighthouse{
+  position:absolute;
+  left:30px;bottom:0;
+  height:490px;width:auto;
+  opacity:0.045;
+  z-index:1;
+  pointer-events:none;
+  user-select:none;
 }
 
 .hero-left{
@@ -117,23 +128,23 @@ nav{
 
 .hero-kicker{
   font-size:10px;font-weight:500;
-  letter-spacing:0.18em;text-transform:uppercase;
+  letter-spacing:0.2em;text-transform:uppercase;
   color:var(--muted);
-  margin-bottom:24px;
-  display:flex;align-items:center;gap:12px;
+  margin-bottom:40px;
+  display:flex;align-items:center;gap:14px;
 }
 .hero-kicker::before{
-  content:'';width:28px;height:1px;
+  content:'';width:36px;height:1px;
   background:var(--muted);display:inline-block;
   flex-shrink:0;
 }
 
 h1{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(52px,6vw,82px);
+  font-size:clamp(62px,6.8vw,96px);
   font-weight:300;
-  line-height:1.0;
-  letter-spacing:-0.025em;
+  line-height:0.97;
+  letter-spacing:-0.03em;
   color:var(--ink);
   margin-bottom:0;
 }
@@ -312,6 +323,23 @@ h1 em{font-style:italic;font-weight:300;}
   padding:36px 40px;
   font-size:14px;font-weight:300;
   color:var(--muted2);line-height:1.78;
+  position:relative;z-index:1;
+}
+
+.service-num,.service-name{position:relative;z-index:1;}
+
+/* Giant background row number */
+.service-row[data-num]::after{
+  content:attr(data-num);
+  position:absolute;
+  right:20px;bottom:-28px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:150px;font-weight:300;font-style:italic;
+  color:var(--ink);opacity:0.065;
+  line-height:1;
+  pointer-events:none;z-index:0;
+  user-select:none;
+  letter-spacing:-0.04em;
 }
 
 /* ─── COMPLIANCE ─── */
@@ -329,18 +357,18 @@ h1 em{font-style:italic;font-weight:300;}
   pointer-events:none;filter:blur(70px);
 }
 .c-blob-1{
-  width:500px;height:500px;top:-150px;left:-150px;
-  background:radial-gradient(circle, rgba(255,255,255,0.035) 0%, transparent 65%);
+  width:600px;height:600px;top:-180px;left:-180px;
+  background:radial-gradient(circle, rgba(255,255,255,0.075) 0%, transparent 65%);
   animation:cb1 18s ease-in-out infinite;
 }
 .c-blob-2{
-  width:400px;height:400px;bottom:-100px;right:-100px;
-  background:radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 65%);
+  width:480px;height:480px;bottom:-120px;right:-120px;
+  background:radial-gradient(circle, rgba(255,255,255,0.055) 0%, transparent 65%);
   animation:cb2 22s ease-in-out infinite;
 }
 .c-blob-3{
-  width:280px;height:280px;top:50%;left:45%;
-  background:radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 65%);
+  width:320px;height:320px;top:50%;left:40%;
+  background:radial-gradient(circle, rgba(255,255,255,0.045) 0%, transparent 65%);
   animation:cb3 26s ease-in-out infinite;
 }
 @keyframes cb1{0%,100%{transform:translate(0,0);}40%{transform:translate(40px,30px);}70%{transform:translate(-20px,45px);}}
@@ -472,9 +500,9 @@ h1 em{font-style:italic;font-weight:300;}
 .btn-ink{
   display:inline-flex;align-items:center;justify-content:center;
   background:var(--ink);color:var(--off);
-  padding:16px 32px;border-radius:5px;
-  font-size:14px;font-weight:500;
-  text-decoration:none;letter-spacing:0.01em;
+  padding:20px 44px;border-radius:5px;
+  font-size:15px;font-weight:500;
+  text-decoration:none;letter-spacing:0.02em;
   transition:background 0.15s,transform 0.12s;
 }
 .btn-ink:hover{background:#2a2825;transform:translateY(-2px);}
@@ -547,7 +575,7 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo"><img src="faro-logo.png" alt="Faro" height="52"></a>
+  <a href="#" class="nav-logo"><img src="faro-logo.png" alt="Faro" height="46" style="display:block;"></a>
   <div class="nav-right">
     <a href="#services" class="nav-link">What we do</a>
     <a href="#contact" class="nav-link">Contact</a>
@@ -558,6 +586,51 @@ footer{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
+
+  <!-- Lighthouse watermark -->
+  <svg class="hero-lighthouse" viewBox="0 0 200 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <!-- Ground line -->
+    <line x1="0" y1="550" x2="200" y2="550" stroke="#0a0a0d" stroke-width="1.5"/>
+    <!-- Foundation base -->
+    <polygon points="12,550 188,550 170,508 30,508" fill="none" stroke="#0a0a0d" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Tower body -->
+    <polygon points="64,508 136,508 118,186 82,186" fill="none" stroke="#0a0a0d" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Arch doorway -->
+    <path d="M87,508 L87,476 Q100,460 113,476 L113,508" fill="none" stroke="#0a0a0d" stroke-width="1.2"/>
+    <!-- Arched window lower -->
+    <path d="M91,415 L91,393 Q100,381 109,393 L109,415 Z" fill="none" stroke="#0a0a0d" stroke-width="1.1"/>
+    <!-- Round window middle -->
+    <ellipse cx="100" cy="318" rx="8" ry="11" fill="none" stroke="#0a0a0d" stroke-width="1.1"/>
+    <!-- Round window upper -->
+    <ellipse cx="100" cy="245" rx="6" ry="8" fill="none" stroke="#0a0a0d" stroke-width="1.1"/>
+    <!-- Gallery platform -->
+    <rect x="71" y="173" width="58" height="13" rx="1" fill="none" stroke="#0a0a0d" stroke-width="1.5"/>
+    <!-- Railing uprights -->
+    <line x1="77" y1="173" x2="77" y2="186" stroke="#0a0a0d" stroke-width="1"/>
+    <line x1="84" y1="173" x2="84" y2="186" stroke="#0a0a0d" stroke-width="1"/>
+    <line x1="91" y1="173" x2="91" y2="186" stroke="#0a0a0d" stroke-width="1"/>
+    <line x1="100" y1="173" x2="100" y2="186" stroke="#0a0a0d" stroke-width="1"/>
+    <line x1="109" y1="173" x2="109" y2="186" stroke="#0a0a0d" stroke-width="1"/>
+    <line x1="116" y1="173" x2="116" y2="186" stroke="#0a0a0d" stroke-width="1"/>
+    <line x1="123" y1="173" x2="123" y2="186" stroke="#0a0a0d" stroke-width="1"/>
+    <!-- Lantern room -->
+    <rect x="76" y="125" width="48" height="48" rx="1" fill="none" stroke="#0a0a0d" stroke-width="1.5"/>
+    <!-- Lantern pane dividers -->
+    <line x1="100" y1="125" x2="100" y2="173" stroke="#0a0a0d" stroke-width="0.9"/>
+    <line x1="88" y1="125" x2="88" y2="173" stroke="#0a0a0d" stroke-width="0.9"/>
+    <line x1="112" y1="125" x2="112" y2="173" stroke="#0a0a0d" stroke-width="0.9"/>
+    <line x1="76" y1="149" x2="124" y2="149" stroke="#0a0a0d" stroke-width="0.9"/>
+    <!-- Dome cap -->
+    <path d="M76,125 Q100,86 124,125" fill="none" stroke="#0a0a0d" stroke-width="1.5"/>
+    <!-- Finial post -->
+    <line x1="100" y1="86" x2="100" y2="68" stroke="#0a0a0d" stroke-width="1.5"/>
+    <!-- Finial ball -->
+    <circle cx="100" cy="64" r="5" fill="none" stroke="#0a0a0d" stroke-width="1.2"/>
+    <!-- Light rays -->
+    <line x1="124" y1="144" x2="168" y2="126" stroke="#0a0a0d" stroke-width="0.8" stroke-dasharray="4 5"/>
+    <line x1="124" y1="150" x2="172" y2="149" stroke="#0a0a0d" stroke-width="0.8" stroke-dasharray="4 5"/>
+    <line x1="124" y1="157" x2="166" y2="172" stroke="#0a0a0d" stroke-width="0.8" stroke-dasharray="4 5"/>
+  </svg>
 
   <div class="hero-left">
     <div class="hero-kicker">Campus lost &amp; found</div>
@@ -593,31 +666,31 @@ footer{
     <div class="services-count">five services</div>
   </div>
 
-  <div class="service-row reveal">
+  <div class="service-row reveal" data-num="01">
     <div class="service-num">01</div>
     <div class="service-name">Staff dashboard</div>
     <div class="service-desc">A simple web platform for front-desk staff to log found items with a photo, AI-generated description, and location. No training needed — most staff are logging items within minutes of getting access.</div>
   </div>
 
-  <div class="service-row reveal d1">
+  <div class="service-row reveal d1" data-num="02">
     <div class="service-num">02</div>
     <div class="service-name">Student search &amp; claims</div>
     <div class="service-desc">Students describe what they lost in plain language and search the live inventory. High-value items stay blurred until a student can verify ownership — keeping the process honest without adding friction for staff.</div>
   </div>
 
-  <div class="service-row reveal d2">
+  <div class="service-row reveal d2" data-num="03">
     <div class="service-num">03</div>
     <div class="service-name">SMS alerts</div>
     <div class="service-desc">Students register what they lost. The moment a matching item gets logged, they get a text. No need to keep checking back — the system does the follow-up automatically.</div>
   </div>
 
-  <div class="service-row reveal">
+  <div class="service-row reveal" data-num="04">
     <div class="service-num">04</div>
     <div class="service-name">Verified pickup</div>
     <div class="service-desc">Every claim requires student ID and a secure PIN before anything gets handed over. A full audit trail is kept from the moment an item is logged to the moment it's returned.</div>
   </div>
 
-  <div class="service-row reveal d1">
+  <div class="service-row reveal d1" data-num="05">
     <div class="service-num">05</div>
     <div class="service-name">Portal integration</div>
     <div class="service-desc">Faro works as a standalone platform or integrates into your existing campus portal. Built to slot into whatever your university already has — not replace it.</div>
