@@ -50,11 +50,10 @@ nav{
 }
 
 .nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;font-weight:400;
-  color:var(--ink);text-decoration:none;
-  letter-spacing:0.08em;text-transform:uppercase;
+  text-decoration:none;
+  display:flex;align-items:center;
 }
+.nav-logo img{display:block;}
 
 .nav-right{display:flex;align-items:center;gap:32px;}
 
@@ -497,11 +496,9 @@ footer{
 }
 
 .footer-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;font-weight:300;
-  color:rgba(245,243,239,0.2);
-  letter-spacing:0.08em;text-transform:uppercase;
+  display:flex;align-items:center;
 }
+.footer-logo img{display:block;opacity:0.75;}
 
 .footer-copy{
   font-size:11px;color:rgba(245,243,239,0.15);
@@ -550,7 +547,7 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo"><img src="faro-logo.png" alt="Faro" height="38"></a>
+  <a href="#" class="nav-logo"><img src="faro-logo.png" alt="Faro" height="52"></a>
   <div class="nav-right">
     <a href="#services" class="nav-link">What we do</a>
     <a href="#contact" class="nav-link">Contact</a>
@@ -664,7 +661,7 @@ footer{
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><img src="faro-logo.png" alt="Faro" height="38"></div>
+  <div class="footer-logo"><img src="faro-logo.png" alt="Faro" height="44"></div>
   <div class="footer-copy">© 2026 Faro · farocampus.com</div>
 </footer>
 
