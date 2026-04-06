@@ -109,12 +109,12 @@ nav{
   clip-path:polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
-/* Logo watermark */
+/* Lighthouse watermark */
 .hero-lighthouse{
   position:absolute;
-  left:-10px;bottom:-20px;
-  height:520px;width:auto;
-  opacity:0.12;
+  left:30px;bottom:0;
+  height:490px;width:auto;
+  opacity:0.15;
   z-index:1;
   pointer-events:none;
   user-select:none;
@@ -587,8 +587,42 @@ footer{
 <section class="hero">
   <div class="hero-grid"></div>
 
-  <!-- Logo watermark -->
-  <img class="hero-lighthouse" src="faro-logo.png" alt="" aria-hidden="true">
+  <!-- Lighthouse watermark (stroke SVG matching logo shape) -->
+  <svg class="hero-lighthouse" viewBox="0 0 210 570" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <!-- Foundation base -->
+    <rect x="18" y="548" width="154" height="18" rx="1" fill="none" stroke="#0a0a0d" stroke-width="2.5"/>
+    <!-- Tower body — matches logo's dramatic taper -->
+    <polygon points="42,548 148,548 116,155 84,155" fill="none" stroke="#0a0a0d" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Diagonal stripe (logo's signature band) — two parallel lines within tower bounds -->
+    <line x1="54" y1="548" x2="96" y2="155" stroke="#0a0a0d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="72" y1="548" x2="114" y2="155" stroke="#0a0a0d" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Gallery platform -->
+    <rect x="64" y="140" width="72" height="15" rx="1" fill="none" stroke="#0a0a0d" stroke-width="2.5"/>
+    <!-- Railing uprights -->
+    <line x1="70" y1="140" x2="70" y2="155" stroke="#0a0a0d" stroke-width="1.5"/>
+    <line x1="80" y1="140" x2="80" y2="155" stroke="#0a0a0d" stroke-width="1.5"/>
+    <line x1="90" y1="140" x2="90" y2="155" stroke="#0a0a0d" stroke-width="1.5"/>
+    <line x1="100" y1="140" x2="100" y2="155" stroke="#0a0a0d" stroke-width="1.5"/>
+    <line x1="110" y1="140" x2="110" y2="155" stroke="#0a0a0d" stroke-width="1.5"/>
+    <line x1="120" y1="140" x2="120" y2="155" stroke="#0a0a0d" stroke-width="1.5"/>
+    <line x1="130" y1="140" x2="130" y2="155" stroke="#0a0a0d" stroke-width="1.5"/>
+    <!-- Lantern room -->
+    <rect x="72" y="88" width="56" height="52" rx="1" fill="none" stroke="#0a0a0d" stroke-width="2.5"/>
+    <!-- Lantern pane dividers -->
+    <line x1="100" y1="88" x2="100" y2="140" stroke="#0a0a0d" stroke-width="1.2"/>
+    <line x1="86" y1="88" x2="86" y2="140" stroke="#0a0a0d" stroke-width="1.2"/>
+    <line x1="114" y1="88" x2="114" y2="140" stroke="#0a0a0d" stroke-width="1.2"/>
+    <line x1="72" y1="114" x2="128" y2="114" stroke="#0a0a0d" stroke-width="1.2"/>
+    <!-- Dome cap -->
+    <path d="M72,88 Q100,50 128,88" fill="none" stroke="#0a0a0d" stroke-width="2.5"/>
+    <!-- Finial post -->
+    <line x1="100" y1="50" x2="100" y2="34" stroke="#0a0a0d" stroke-width="2"/>
+    <circle cx="100" cy="30" r="5" fill="none" stroke="#0a0a0d" stroke-width="2"/>
+    <!-- Light beams (sweep right, matching logo) -->
+    <line x1="128" y1="100" x2="200" y2="62" stroke="#0a0a0d" stroke-width="2" stroke-linecap="round"/>
+    <line x1="128" y1="114" x2="205" y2="114" stroke="#0a0a0d" stroke-width="2" stroke-linecap="round"/>
+    <line x1="128" y1="128" x2="200" y2="166" stroke="#0a0a0d" stroke-width="2" stroke-linecap="round"/>
+  </svg>
 
   <div class="hero-left">
     <div class="hero-kicker">Campus lost &amp; found</div>
