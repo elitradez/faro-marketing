@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Faro — Campus Lost & Found</title>
+<title>Laika Campus — Lost & Found for Universities</title>
+<meta name="description" content="Laika Campus is modern lost and found infrastructure for universities. Staff log items in 30 seconds. Students find their things online. Ownership verified at pickup.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -51,31 +52,48 @@ nav{
 
 .nav-logo{
   text-decoration:none;
-  display:flex;align-items:center;
+  display:flex;align-items:center;gap:10px;
 }
-.nav-logo img{display:block;}
+.nav-logo-mark{
+  width:28px;height:28px;display:block;opacity:0.9;
+}
+.nav-logo-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-weight:400;
+  color:var(--ink);letter-spacing:0.06em;
+  text-transform:uppercase;line-height:1;
+}
 
 .nav-right{display:flex;align-items:center;gap:32px;}
 
 .nav-link{
   font-size:13px;font-weight:400;
   color:var(--muted2);text-decoration:none;
-  transition:color 0.15s;
+  transition:color 0.2s;
+  position:relative;
+}
+.nav-link::after{
+  content:'';position:absolute;left:0;bottom:-2px;
+  width:0;height:1px;background:var(--ink);
+  transition:width 0.2s ease;
 }
 .nav-link:hover{color:var(--ink);}
+.nav-link:hover::after{width:100%;}
 
 .nav-btn{
   background:var(--ink);color:var(--off);
   padding:8px 20px;border-radius:5px;
   font-size:13px;font-weight:500;
   text-decoration:none;
-  transition:background 0.15s,transform 0.12s;
+  transition:background 0.18s,transform 0.15s,box-shadow 0.18s;
 }
-.nav-btn:hover{background:#2a2825;transform:translateY(-1px);}
+.nav-btn:hover{
+  background:#2a2825;
+  transform:translateY(-1px) scale(1.02);
+  box-shadow:0 4px 14px rgba(10,10,13,0.18);
+}
 
 /* ─── HERO ─── */
-/* No min-height:100vh — let content dictate height, 
-   just add generous padding so it feels full without the gap */
 .hero{
   padding:140px 56px 100px;
   position:relative;overflow:hidden;
@@ -147,6 +165,7 @@ h1{
   letter-spacing:-0.03em;
   color:var(--ink);
   margin-bottom:0;
+  will-change:transform;
 }
 h1 em{font-style:italic;font-weight:300;}
 
@@ -186,16 +205,20 @@ h1 em{font-style:italic;font-weight:300;}
   padding:14px 28px;border-radius:5px;
   font-size:14px;font-weight:500;
   text-decoration:none;
-  transition:background 0.15s,transform 0.12s;
+  transition:background 0.18s,transform 0.15s,box-shadow 0.18s;
 }
-.btn-dark:hover{background:#2a2825;transform:translateY(-2px);}
+.btn-dark:hover{
+  background:#2a2825;
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 6px 18px rgba(10,10,13,0.2);
+}
 
 .btn-ghost{
   font-size:14px;font-weight:400;
   color:var(--muted2);text-decoration:none;
   border-bottom:1px solid var(--rule);
   padding-bottom:2px;
-  transition:color 0.15s,border-color 0.15s;
+  transition:color 0.18s,border-color 0.18s;
 }
 .btn-ghost:hover{color:var(--ink);border-color:var(--muted2);}
 
@@ -217,6 +240,113 @@ h1 em{font-style:italic;font-weight:300;}
   color:var(--muted);
   letter-spacing:0.06em;text-transform:uppercase;
   line-height:1.55;padding-bottom:5px;
+}
+
+/* ─── THE PROBLEM ─── */
+.problem{
+  background:var(--ink);
+  padding:96px 56px;
+  border-bottom:1px solid rgba(245,243,239,0.07);
+  position:relative;overflow:hidden;
+}
+
+/* Dot grid */
+.problem::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:32px 32px;pointer-events:none;
+}
+
+/* Glow */
+.problem::after{
+  content:'';position:absolute;
+  bottom:-120px;right:-100px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 65%);
+  filter:blur(60px);pointer-events:none;
+}
+
+.problem-header{
+  position:relative;z-index:1;
+  display:flex;align-items:baseline;gap:20px;
+  margin-bottom:72px;
+}
+
+.problem-kicker{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(245,243,239,0.22);
+  display:flex;align-items:center;gap:12px;
+  flex-shrink:0;
+}
+.problem-kicker::before{
+  content:'';width:28px;height:1px;
+  background:rgba(245,243,239,0.18);display:inline-block;
+  flex-shrink:0;
+}
+
+.problem-rule{flex:1;height:1px;background:rgba(245,243,239,0.06);}
+
+.problem-stats{
+  position:relative;z-index:1;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border:1px solid rgba(245,243,239,0.07);
+  margin-bottom:64px;
+}
+
+.problem-stat{
+  padding:52px 48px;
+  border-right:1px solid rgba(245,243,239,0.07);
+}
+.problem-stat:last-child{border-right:none;}
+
+.ps-value{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(56px,7vw,88px);
+  font-weight:300;
+  line-height:0.9;
+  letter-spacing:-0.03em;
+  color:var(--off);
+  margin-bottom:20px;
+}
+.ps-value em{font-style:italic;color:rgba(245,243,239,0.55);}
+
+.ps-label{
+  font-size:13px;font-weight:300;
+  color:rgba(245,243,239,0.38);
+  line-height:1.65;
+  max-width:220px;
+}
+
+.problem-body{
+  position:relative;z-index:1;
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:60px;
+  align-items:start;
+}
+
+.pb-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(245,243,239,0.2);
+  padding-top:6px;
+  line-height:1.6;
+}
+
+.pb-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(20px,2.4vw,28px);
+  font-weight:300;
+  color:rgba(245,243,239,0.72);
+  line-height:1.5;
+  letter-spacing:-0.01em;
+}
+.pb-text strong{
+  font-weight:400;font-style:italic;
+  color:rgba(245,243,239,0.88);
 }
 
 /* ─── MISSION STRIP ─── */
@@ -262,6 +392,73 @@ h1 em{font-style:italic;font-weight:300;}
   font-weight:300;font-style:italic;
   color:rgba(245,243,239,0.82);
   line-height:1.42;letter-spacing:-0.01em;
+}
+
+/* ─── HOW IT WORKS ─── */
+.how{
+  border-bottom:1px solid var(--rule);
+  background:var(--cream);
+}
+
+.how-header{
+  padding:52px 56px 22px;
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-bottom:1px solid var(--rule);
+}
+
+.how-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,3vw,40px);
+  font-weight:300;color:var(--ink);letter-spacing:-0.02em;
+}
+
+.how-count{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-style:italic;font-weight:300;color:var(--muted);
+}
+
+.how-row{
+  display:grid;
+  grid-template-columns:80px 1fr 1fr;
+  border-bottom:1px solid var(--rule);
+  transition:background 0.2s;
+  position:relative;overflow:hidden;
+}
+.how-row:last-child{border-bottom:none;}
+
+.how-row::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--ink);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.3s ease;
+}
+.how-row:hover::before{transform:scaleY(1);}
+.how-row:hover{background:var(--offwarm);}
+
+.how-num{
+  padding:36px 24px;padding-top:38px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;font-style:italic;font-weight:300;
+  color:var(--muted);border-right:1px solid var(--rule);
+  position:relative;z-index:1;
+}
+
+.how-name{
+  padding:36px 40px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:400;
+  color:var(--ink);
+  border-right:1px solid var(--rule);
+  letter-spacing:-0.01em;line-height:1.3;
+  position:relative;z-index:1;
+}
+
+.how-desc{
+  padding:36px 40px;
+  font-size:14px;font-weight:300;
+  color:var(--muted2);line-height:1.78;
+  position:relative;z-index:1;
 }
 
 /* ─── SERVICES ─── */
@@ -328,6 +525,49 @@ h1 em{font-style:italic;font-weight:300;}
 
 .service-num,.service-name{position:relative;z-index:1;}
 
+/* ─── SOCIAL PROOF ─── */
+.proof{
+  padding:0 56px;
+  border-bottom:1px solid var(--rule);
+  background:var(--off);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:40px;
+  min-height:72px;
+}
+
+.proof-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.proof-rule{flex:1;height:1px;background:var(--rule);}
+
+.proof-entries{
+  display:flex;align-items:center;gap:48px;
+}
+
+.proof-entry{
+  display:flex;align-items:center;gap:14px;
+}
+
+.proof-marker{
+  width:6px;height:6px;border-radius:50%;
+  background:#22c55e;flex-shrink:0;
+}
+
+.proof-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:400;
+  color:var(--ink);letter-spacing:-0.01em;
+}
+
+.proof-status{
+  font-size:11px;font-weight:400;
+  color:var(--muted);letter-spacing:0.05em;
+  text-transform:uppercase;
+}
 
 /* ─── COMPLIANCE ─── */
 .compliance-teaser{
@@ -431,12 +671,14 @@ h1 em{font-style:italic;font-weight:300;}
   padding:13px 26px;border-radius:5px;
   font-size:14px;font-weight:500;
   text-decoration:none;letter-spacing:0.01em;
-  transition:background 0.15s,border-color 0.15s,color 0.15s,transform 0.12s;
+  transition:background 0.18s,border-color 0.18s,color 0.18s,transform 0.15s,box-shadow 0.18s;
 }
 .btn-cream:hover{
   background:rgba(245,243,239,0.06);
   border-color:rgba(245,243,239,0.36);
-  color:var(--off);transform:translateY(-2px);
+  color:var(--off);
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
 }
 
 /* ─── CONTACT ─── */
@@ -490,9 +732,13 @@ h1 em{font-style:italic;font-weight:300;}
   padding:20px 44px;border-radius:5px;
   font-size:15px;font-weight:500;
   text-decoration:none;letter-spacing:0.02em;
-  transition:background 0.15s,transform 0.12s;
+  transition:background 0.18s,transform 0.15s,box-shadow 0.18s;
 }
-.btn-ink:hover{background:#2a2825;transform:translateY(-2px);}
+.btn-ink:hover{
+  background:#2a2825;
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 8px 24px rgba(10,10,13,0.22);
+}
 
 .contact-email{
   display:block;text-align:center;
@@ -511,9 +757,14 @@ footer{
 }
 
 .footer-logo{
-  display:flex;align-items:center;
+  display:flex;align-items:center;gap:10px;
 }
-.footer-logo img{display:block;opacity:0.75;}
+.footer-logo-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-weight:300;
+  color:rgba(245,243,239,0.5);
+  letter-spacing:0.08em;text-transform:uppercase;
+}
 
 .footer-copy{
   font-size:11px;color:rgba(245,243,239,0.15);
@@ -528,7 +779,10 @@ footer{
   transition:opacity 0.65s ease,transform 0.65s ease;
 }
 .reveal.on{opacity:1;transform:translateY(0);}
-.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+
+/* counter: hide the text until animated */
+[data-counter]{display:inline-block;}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:800px){
@@ -543,12 +797,25 @@ footer{
   .hero-grid{display:none;}
   .hero-left{padding-right:0;}
   .hero-right{padding-left:0;}
+  .problem{padding:64px 24px;}
+  .problem-stats{grid-template-columns:1fr;}
+  .problem-stat{border-right:none;border-bottom:1px solid rgba(245,243,239,0.07);padding:40px 24px;}
+  .problem-stat:last-child{border-bottom:none;}
+  .problem-body{grid-template-columns:1fr;gap:12px;}
+  .pb-label{display:none;}
   .mission-strip{grid-template-columns:1fr;gap:16px;padding:52px 24px;}
+  .how-header{padding:36px 24px 20px;}
+  .how-row{grid-template-columns:48px 1fr;}
+  .how-name{border-right:none;padding:24px 20px 0;}
+  .how-desc{grid-column:2;padding:8px 20px 28px;}
+  .how-num{padding:24px 14px;}
   .services-header{padding:36px 24px 20px;}
   .service-row{grid-template-columns:48px 1fr;}
   .service-name{border-right:none;padding:24px 20px 0;}
   .service-desc{grid-column:2;padding:8px 20px 28px;}
   .service-num{padding:24px 14px;}
+  .proof{flex-wrap:wrap;padding:20px 24px;gap:16px;min-height:auto;}
+  .proof-entries{flex-wrap:wrap;gap:24px;}
   .compliance-teaser{grid-template-columns:1fr;}
   .comp-left{border-right:none;border-bottom:1px solid rgba(245,243,239,0.06);padding:52px 24px 40px;}
   .comp-right{padding:40px 24px 56px;}
@@ -562,7 +829,13 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo"><img src="faro-logo.png" alt="Faro" height="46" style="display:block;"></a>
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="14" cy="14" r="13.5" stroke="#0a0a0d" stroke-opacity="0.15"/>
+      <circle cx="14" cy="14" r="3" fill="#0a0a0d" opacity="0.7"/>
+    </svg>
+    <span class="nav-logo-text">Laika Campus</span>
+  </a>
   <div class="nav-right">
     <a href="#services" class="nav-link">What we do</a>
     <a href="#contact" class="nav-link">Contact</a>
@@ -574,26 +847,59 @@ footer{
 <section class="hero">
   <div class="hero-grid"></div>
 
-  <!-- Lighthouse only (cropped from logo, no text) -->
+  <!-- Lighthouse -->
   <img class="hero-logo-bg" src="faro-lighthouse.png" alt="" aria-hidden="true">
 
   <div class="hero-left">
     <div class="hero-kicker">Campus lost &amp; found</div>
-    <h1>Lost and found<br>systems for<br><em>universities.</em></h1>
+    <h1 id="hero-h1">Lost and found<br>built for<br><em>universities.</em></h1>
     <div class="hero-tag">Est. 2026 &nbsp;·&nbsp; Salt Lake City, UT</div>
   </div>
 
   <div class="hero-right">
     <p class="hero-mission">
-      Faro is <strong>lost and found infrastructure built for universities.</strong> We make it easy for staff to log found items and for students to get their things back — without the clipboard, the spreadsheet, or the phone tag.
+      Most campuses are still running lost and found on <strong>a cardboard box and a shared spreadsheet.</strong> Laika Campus replaces it — staff log items in seconds, students find their things online, and every pickup is verified.
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn-dark">Request a demo</a>
       <a href="#services" class="btn-ghost">See what we do</a>
     </div>
     <div class="stat-block">
-      <div class="stat-number">30s</div>
+      <div class="stat-number" data-counter="30" data-suffix="s" data-duration="1200">30s</div>
       <div class="stat-caption">Average time for staff<br>to log a found item</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="problem" id="problem">
+  <div class="problem-header reveal">
+    <div class="problem-kicker">The problem</div>
+    <div class="problem-rule"></div>
+  </div>
+
+  <div class="problem-stats">
+    <div class="problem-stat reveal">
+      <div class="ps-value"><span data-counter="4.5" data-suffix="M" data-duration="1400" data-decimal="1">4.5M</span></div>
+      <div class="ps-label">Items lost on U.S. university campuses every year</div>
+    </div>
+    <div class="problem-stat reveal d1">
+      <div class="ps-value"><em>&lt;</em><span data-counter="25" data-suffix="%" data-duration="1200">25</span><em>%</em></div>
+      <div class="ps-label">Are ever returned to their owner</div>
+    </div>
+    <div class="problem-stat reveal d2">
+      <div class="ps-value"><span data-counter="3" data-suffix="+" data-duration="900">3+</span> <em style="font-size:0.55em;vertical-align:middle;">hrs</em></div>
+      <div class="ps-label">Staff waste per week on manual tracking and phone tag</div>
+    </div>
+  </div>
+
+  <div class="problem-body reveal">
+    <div class="pb-label">The current<br>solution</div>
+    <div class="pb-text">
+      The standard approach: <strong>a cardboard box behind the front desk and a spreadsheet nobody updates.</strong>
+      In 2026, universities run billion-dollar research programs, deploy AI-assisted coursework, and process thousands of students a day —
+      and they're managing lost property with a Post-it note. It's not a resources problem.
+      It's the absence of a system that was ever designed to work.
     </div>
   </div>
 </section>
@@ -601,8 +907,34 @@ footer{
 <!-- MISSION -->
 <div class="mission-strip reveal">
   <div class="mission-label">Our mission</div>
-  <div class="mission-text">Every campus loses things. Most have no real system for getting them back. Faro fixes that — built specifically for how universities actually work.</div>
+  <div class="mission-text">Every campus loses things. Most have no real system for getting them back. Laika Campus fixes that — built specifically for how universities actually work.</div>
 </div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-header reveal">
+    <div class="how-title">How it works</div>
+    <div class="how-count">three steps</div>
+  </div>
+
+  <div class="how-row reveal">
+    <div class="how-num">01</div>
+    <div class="how-name">Staff log found items<br>in 30 seconds</div>
+    <div class="how-desc">Photo goes in. AI generates a name, description, and value classification automatically. Staff confirm, add a location, and save. Most items are logged in under half a minute — no training required.</div>
+  </div>
+
+  <div class="how-row reveal d1">
+    <div class="how-num">02</div>
+    <div class="how-name">Students search and<br>describe their item</div>
+    <div class="how-desc">Students visit the portal, describe what they lost in plain language, and browse the live inventory. High-value items stay blurred until the student can describe it from memory — ownership is confirmed before anything is revealed.</div>
+  </div>
+
+  <div class="how-row reveal d2">
+    <div class="how-num">03</div>
+    <div class="how-name">Ownership verified<br>before pickup</div>
+    <div class="how-desc">Staff review the submitted claim, confirm the description matches, and hand over the item in person with ID verification. A full audit trail runs from the moment an item is logged to the moment it leaves the desk.</div>
+  </div>
+</section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
@@ -638,9 +970,24 @@ footer{
   <div class="service-row reveal d1" data-num="05">
     <div class="service-num">05</div>
     <div class="service-name">Portal integration</div>
-    <div class="service-desc">Faro works as a standalone platform or integrates into your existing campus portal. Built to slot into whatever your university already has — not replace it.</div>
+    <div class="service-desc">Laika Campus works as a standalone platform or integrates into your existing campus portal. Built to slot into whatever your university already has — not replace it.</div>
   </div>
 </section>
+
+<!-- SOCIAL PROOF -->
+<div class="proof reveal">
+  <div class="proof-label">Live today</div>
+  <div class="proof-rule"></div>
+  <div class="proof-entries">
+    <div class="proof-entry">
+      <div class="proof-marker"></div>
+      <div>
+        <div class="proof-name">University of Utah</div>
+        <div class="proof-status">Active deployment</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- COMPLIANCE -->
 <section class="compliance-teaser" id="compliance">
@@ -651,7 +998,7 @@ footer{
   <div class="comp-left reveal">
     <div class="comp-label">Compliance</div>
     <div class="comp-title">Built to meet<br>university <em>standards.</em></div>
-    <p class="comp-body">Universities have real legal obligations when it comes to the software they deploy. Faro is built to meet those standards from day one — ADA, FERPA, HECVAT, and more.</p>
+    <p class="comp-body">Universities have real legal obligations when it comes to the software they deploy. Laika Campus is built to meet those standards from day one — ADA, FERPA, HECVAT, and more.</p>
   </div>
   <div class="comp-right reveal d1">
     <div class="comp-tags">
@@ -668,34 +1015,85 @@ footer{
 <section class="contact" id="contact">
   <div class="reveal">
     <div class="contact-label">Get in touch</div>
-    <div class="contact-title">Ready to bring<br>Faro to your<br>campus?</div>
+    <div class="contact-title">Ready to bring<br>Laika Campus<br>to your campus?</div>
     <p class="contact-sub">We're working with universities now. Reach out to schedule a demo or ask questions — we'll get back to you the same day.</p>
   </div>
   <div class="contact-right reveal d1">
-    <a href="mailto:ebunting07@gmail.com?subject=Faro — Getting in touch" class="btn-ink">Contact us →</a>
+    <a href="mailto:ebunting07@gmail.com?subject=Laika Campus — Getting in touch" class="btn-ink">Contact us →</a>
     <a href="mailto:ebunting07@gmail.com" class="contact-email">ebunting07@gmail.com</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><img src="faro-logo.png" alt="Faro" height="44"></div>
-  <div class="footer-copy">© 2026 Faro · farocampus.com</div>
+  <div class="footer-logo">
+    <svg width="18" height="18" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="14" cy="14" r="13.5" stroke="rgba(245,243,239,0.3)" />
+      <circle cx="14" cy="14" r="3" fill="rgba(245,243,239,0.4)"/>
+    </svg>
+    <span class="footer-logo-text">Laika Campus</span>
+  </div>
+  <div class="footer-copy">© 2026 Laika Campus · laikacampus.com</div>
 </footer>
 
 <script>
+// ── Reveal on scroll ──────────────────────────────────────────────────────────
 const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e,i) => {
-    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'),i*55);
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('on'), i * 55);
   });
-},{threshold:0.06,rootMargin:'0px 0px -16px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+}, { threshold: 0.06, rootMargin: '0px 0px -16px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── Smooth scroll ─────────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
+
+// ── Parallax on hero headline ─────────────────────────────────────────────────
+const heroH1 = document.getElementById('hero-h1');
+function applyParallax() {
+  if (!heroH1) return;
+  const scrollY = window.scrollY;
+  heroH1.style.transform = 'translateY(' + (scrollY * 0.18) + 'px)';
+}
+window.addEventListener('scroll', applyParallax, { passive: true });
+
+// ── Counter animation ─────────────────────────────────────────────────────────
+function easeOutQuad(t) { return t * (2 - t); }
+
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.counter);
+  const suffix = el.dataset.suffix || '';
+  const duration = parseInt(el.dataset.duration || '1000', 10);
+  const decimal = parseInt(el.dataset.decimal || '0', 10);
+  const start = performance.now();
+
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutQuad(progress);
+    const current = eased * target;
+    el.textContent = decimal > 0 ? current.toFixed(decimal) + suffix : Math.round(current) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = decimal > 0 ? target.toFixed(decimal) + suffix : target + suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
 </script>
 
 </body>
