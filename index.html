@@ -115,17 +115,7 @@ nav{
   z-index:0;
 }
 
-/* Faint cross-hatch on right panel */
-.hero-grid{
-  position:absolute;
-  top:0;right:0;bottom:0;width:52%;
-  z-index:1;pointer-events:none;
-  background-image:
-    linear-gradient(var(--rule2) 1px, transparent 1px),
-    linear-gradient(90deg, var(--rule2) 1px, transparent 1px);
-  background-size:36px 36px;
-  clip-path:polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
-}
+.hero-grid{display:none;}
 
 /* Lighthouse in bottom-right of hero panel */
 .hero-logo-bg{
@@ -250,12 +240,7 @@ h1 em{font-style:italic;font-weight:300;}
   position:relative;overflow:hidden;
 }
 
-/* Dot grid */
-.problem::before{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size:32px 32px;pointer-events:none;
-}
+.problem::before{display:none;}
 
 /* Glow */
 .problem::after{
@@ -361,12 +346,7 @@ h1 em{font-style:italic;font-weight:300;}
   position:relative;overflow:hidden;
 }
 
-/* Subtle dot grid on dark */
-.mission-strip::before{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size:32px 32px;pointer-events:none;
-}
+.mission-strip::before{display:none;}
 
 /* Glow */
 .mission-strip::after{
@@ -602,12 +582,7 @@ h1 em{font-style:italic;font-weight:300;}
 @keyframes cb2{0%,100%{transform:translate(0,0);}50%{transform:translate(-35px,-25px);}}
 @keyframes cb3{0%,100%{transform:translate(0,0);}35%{transform:translate(18px,-18px);}65%{transform:translate(-12px,14px);}}
 
-/* dot grid */
-.compliance-teaser::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size:28px 28px;
-}
+.compliance-teaser::before{display:none;}
 
 /* shimmer line */
 .compliance-teaser::after{
@@ -690,13 +665,7 @@ h1 em{font-style:italic;font-weight:300;}
   position:relative;overflow:hidden;
 }
 
-.contact::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(var(--rule2) 1px, transparent 1px),
-    linear-gradient(90deg, var(--rule2) 1px, transparent 1px);
-  background-size:48px 48px;pointer-events:none;
-}
+.contact::before{display:none;}
 
 .contact-label{
   position:relative;z-index:1;
