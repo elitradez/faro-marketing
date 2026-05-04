@@ -718,6 +718,20 @@ h1 em{font-style:italic;font-weight:300;}
 }
 .contact-email:hover{color:var(--ink);}
 
+/* ─── CONTACT FORM ─── */
+.contact-form{display:flex;flex-direction:column;gap:12px;width:100%;}
+.cf-row{display:flex;flex-direction:column;gap:5px;}
+.cf-label{font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);}
+.cf-input{background:rgba(10,10,13,0.05);border:1px solid rgba(10,10,13,0.12);border-radius:5px;padding:11px 14px;font-size:14px;font-weight:300;color:var(--ink);font-family:inherit;outline:none;transition:border-color 0.15s,box-shadow 0.15s;width:100%;box-sizing:border-box;}
+.cf-input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(10,10,13,0.07);}
+.cf-input::placeholder{color:var(--muted);}
+.cf-textarea{resize:vertical;min-height:88px;}
+.cf-submit{width:100%;cursor:pointer;font-family:inherit;border:none;}
+.cf-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
+.cf-status{font-size:13px;font-weight:300;color:var(--muted);margin:0;min-height:16px;text-align:center;}
+.cf-status.cf-ok{color:#1a6b3c;}
+.cf-status.cf-err{color:#b53a2a;}
+
 /* ─── FOOTER ─── */
 footer{
   background:var(--ink);
@@ -985,7 +999,22 @@ footer{
     <p class="contact-sub">We're working with universities now. Reach out to schedule a demo or ask questions — we'll get back to you the same day.</p>
   </div>
   <div class="contact-right reveal d1">
-    <a href="mailto:eli@laikacampus.com?subject=Laika — Getting in touch" class="btn-ink">Contact us →</a>
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-name">Name</label>
+        <input class="cf-input" id="cf-name" name="name" type="text" placeholder="Your name" required autocomplete="name">
+      </div>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-email">Email</label>
+        <input class="cf-input" id="cf-email" name="email" type="email" placeholder="you@university.edu" required autocomplete="email">
+      </div>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-msg">Message (optional)</label>
+        <textarea class="cf-input cf-textarea" id="cf-msg" name="message" placeholder="Tell us about your university and what you're looking for…" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn-ink cf-submit">Send message →</button>
+      <p class="cf-status" id="cfStatus" aria-live="polite"></p>
+    </form>
     <a href="mailto:eli@laikacampus.com" class="contact-email">eli@laikacampus.com</a>
   </div>
 </section>
@@ -1000,6 +1029,45 @@ footer{
 </footer>
 
 <script>
+
+// ── Contact form ──────────────────────────────────────────────────────────────
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = contactForm.querySelector('.cf-submit');
+    const status = document.getElementById('cfStatus');
+    const orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.className = 'cf-status';
+    status.textContent = '';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: contactForm.querySelector('#cf-name').value.trim(),
+          email: contactForm.querySelector('#cf-email').value.trim(),
+          message: contactForm.querySelector('#cf-msg').value.trim()
+        })
+      });
+      if (res.ok) {
+        status.className = 'cf-status cf-ok';
+        status.textContent = 'Sent! We'll be in touch today.';
+        contactForm.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.className = 'cf-status cf-err';
+      status.textContent = 'Something went wrong — email eli@laikacampus.com directly.';
+    }
+    btn.disabled = false;
+    btn.textContent = orig;
+  });
+}
+
 // ── Reveal on scroll ──────────────────────────────────────────────────────────
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
