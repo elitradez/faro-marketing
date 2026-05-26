@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laika · Compliance</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="motion.css">
+<script>document.documentElement.classList.add('js-motion');</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -245,11 +247,7 @@ footer{
 
 .footer-copy{font-size:11px;color:rgba(245,243,239,0.22);letter-spacing:0.04em;}
 
-/* ANIMATIONS */
-@keyframes fadeup{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
-.reveal.on{opacity:1;transform:translateY(0);}
-.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}
+/* ANIMATIONS — .reveal, .d1/.d2, and reduced-motion guard live in motion.css */
 
 /* RESPONSIVE */
 @media(max-width:800px){
@@ -464,14 +462,7 @@ footer{
   <div class="footer-copy">© 2026 Laika · laikacampus.com</div>
 </footer>
 
-<script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e,i) => {
-    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'),i*55);
-  });
-},{threshold:0.06,rootMargin:'0px 0px -16px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
+<script src="motion.js"></script>
 
 </body>
 </html>

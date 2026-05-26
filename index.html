@@ -6,6 +6,8 @@
 <title>Laika · Lost & Found for Universities</title>
 <meta name="description" content="Laika is modern lost and found infrastructure for universities. Staff log items in 30 seconds. Students find their things online. Ownership verified at pickup.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="motion.css">
+<script>document.documentElement.classList.add('js-motion');</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -131,7 +133,7 @@ nav{
 .hero-left{
   position:relative;z-index:2;
   padding-right:64px;
-  animation:up 0.8s ease both;
+  animation:laika-up 0.8s ease both;
 }
 
 .hero-kicker{
@@ -172,7 +174,7 @@ h1 em{font-style:italic;font-weight:300;}
 .hero-right{
   position:relative;z-index:2;
   padding-left:88px;
-  animation:up 0.8s 0.1s ease both;
+  animation:laika-up 0.8s 0.1s ease both;
 }
 
 .hero-mission{
@@ -755,17 +757,10 @@ footer{
 }
 
 /* ─── ANIM ─── */
-@keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+/* Tokens, .reveal, .d1–.d3, [data-counter], and reduced-motion
+   guard now live in motion.css (imported in <head>). */
 
-.reveal{
-  opacity:0;transform:translateY(16px);
-  transition:opacity 0.65s ease,transform 0.65s ease;
-}
-.reveal.on{opacity:1;transform:translateY(0);}
-.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
-
-/* counter: hide the text until animated */
-[data-counter]{display:inline-block;}
+/* (prefers-reduced-motion guard lives in motion.css) */
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:800px){
@@ -817,8 +812,9 @@ footer{
     <span class="nav-logo-text">Laika</span>
   </a>
   <div class="nav-right">
+    <a href="#how" class="nav-link">How it works</a>
     <a href="#services" class="nav-link">What we do</a>
-    <a href="#contact" class="nav-link">Contact</a>
+    <a href="compliance.html" class="nav-link">Compliance</a>
     <a href="#contact" class="nav-btn">Get a demo</a>
   </div>
 </nav>
@@ -1028,103 +1024,45 @@ footer{
 </footer>
 
 <script>
-
 // ── Contact form ──────────────────────────────────────────────────────────────
-const contactForm = document.getElementById('contactForm');
+const contactForm = document.getElementById(‘contactForm’);
 if (contactForm) {
-  contactForm.addEventListener('submit', async function(e) {
+  contactForm.addEventListener(‘submit’, async function(e) {
     e.preventDefault();
-    const btn = contactForm.querySelector('.cf-submit');
-    const status = document.getElementById('cfStatus');
+    const btn = contactForm.querySelector(‘.cf-submit’);
+    const status = document.getElementById(‘cfStatus’);
     const orig = btn.textContent;
     btn.disabled = true;
-    btn.textContent = 'Sending…';
-    status.className = 'cf-status';
-    status.textContent = '';
+    btn.textContent = ‘Sending…’;
+    status.className = ‘cf-status’;
+    status.textContent = ‘’;
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch(‘/api/contact’, {
+        method: ‘POST’,
+        headers: { ‘Content-Type’: ‘application/json’ },
         body: JSON.stringify({
-          name: contactForm.querySelector('#cf-name').value.trim(),
-          email: contactForm.querySelector('#cf-email').value.trim(),
-          message: contactForm.querySelector('#cf-msg').value.trim()
+          name: contactForm.querySelector(‘#cf-name’).value.trim(),
+          email: contactForm.querySelector(‘#cf-email’).value.trim(),
+          message: contactForm.querySelector(‘#cf-msg’).value.trim()
         })
       });
       if (res.ok) {
-        status.className = 'cf-status cf-ok';
+        status.className = ‘cf-status cf-ok’;
         status.textContent = "Sent! We’ll be in touch today.";
         contactForm.reset();
       } else {
         throw new Error();
       }
     } catch {
-      status.className = 'cf-status cf-err';
-      status.textContent = 'Something went wrong. Email eli@laikacampus.com directly.';
+      status.className = ‘cf-status cf-err’;
+      status.textContent = ‘Something went wrong. Email eli@laikacampus.com directly.’;
     }
     btn.disabled = false;
     btn.textContent = orig;
   });
 }
-
-// ── Reveal on scroll ──────────────────────────────────────────────────────────
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) setTimeout(() => e.target.classList.add('on'), i * 55);
-  });
-}, { threshold: 0.06, rootMargin: '0px 0px -16px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// ── Smooth scroll ─────────────────────────────────────────────────────────────
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-  });
-});
-
-// ── Parallax on hero headline ─────────────────────────────────────────────────
-const heroH1 = document.getElementById('hero-h1');
-function applyParallax() {
-  if (!heroH1) return;
-  const scrollY = window.scrollY;
-  heroH1.style.transform = 'translateY(' + (scrollY * 0.18) + 'px)';
-}
-window.addEventListener('scroll', applyParallax, { passive: true });
-
-// ── Counter animation ─────────────────────────────────────────────────────────
-function easeOutQuad(t) { return t * (2 - t); }
-
-function animateCounter(el) {
-  const target = parseFloat(el.dataset.counter);
-  const suffix = el.dataset.suffix || '';
-  const duration = parseInt(el.dataset.duration || '1000', 10);
-  const decimal = parseInt(el.dataset.decimal || '0', 10);
-  const start = performance.now();
-
-  function step(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = easeOutQuad(progress);
-    const current = eased * target;
-    el.textContent = decimal > 0 ? current.toFixed(decimal) + suffix : Math.round(current) + suffix;
-    if (progress < 1) requestAnimationFrame(step);
-    else el.textContent = decimal > 0 ? target.toFixed(decimal) + suffix : target + suffix;
-  }
-  requestAnimationFrame(step);
-}
-
-const counterObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateCounter(e.target);
-      counterObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.3 });
-
-document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
 </script>
+<script src="motion.js"></script>
 
 </body>
 </html>

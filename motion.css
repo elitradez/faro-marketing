@@ -1,0 +1,88 @@
+/* ── Laika Motion System — v1 ───────────────────────────────────────────
+   Single source of truth for all motion tokens and animation primitives.
+   Consumed by every page; PRs #2–5 extend this file, never duplicate it.
+
+   Usage pattern:
+     HTML: add class="reveal" (+ optional d1/d2/d3 for stagger delay)
+     JS:   motion.js handles the IntersectionObserver and counter logic
+     Stagger groups: data-stagger="80" on a parent, .reveal on children
+     Counters: data-counter="30" data-suffix="s" data-duration="1200"
+   ─────────────────────────────────────────────────────────────────── */
+
+/* ── Motion tokens ──────────────────────────────────────────────────── */
+:root {
+  --motion-dur:         500ms;
+  --motion-dur-slow:    650ms;
+  --motion-dur-counter: 1200ms;
+  --motion-ease:        cubic-bezier(0.16, 1, 0.3, 1); /* ease-out-expo */
+  --motion-translate:   24px;
+  --motion-stagger:     80ms;
+}
+
+/* ── Initial-load hero keyframe ─────────────────────────────────────── */
+/* Used by .hero-left / .hero-right for above-the-fold staggered entry. */
+@keyframes laika-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Reveal — progressive enhancement ──────────────────────────────── */
+/* .js-motion is added to <html> synchronously in <head> so the hidden  */
+/* state is set before first paint. Without JS the class is absent and  */
+/* all content renders visible — SEO and screen readers unaffected.     */
+.js-motion .reveal {
+  opacity: 0;
+  transform: translateY(var(--motion-translate));
+  transition:
+    opacity   var(--motion-dur) var(--motion-ease),
+    transform var(--motion-dur) var(--motion-ease);
+  will-change: opacity, transform;
+}
+
+.js-motion .reveal.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay helpers — apply alongside .reveal */
+.js-motion .d1 { transition-delay: calc(var(--motion-stagger) * 1); }
+.js-motion .d2 { transition-delay: calc(var(--motion-stagger) * 2); }
+.js-motion .d3 { transition-delay: calc(var(--motion-stagger) * 3); }
+
+/* ── Counter ─────────────────────────────────────────────────────────── */
+[data-counter] { display: inline-block; }
+
+/* ── Reduced motion ─────────────────────────────────────────────────── */
+/* Central guard — every primitive inherits this automatically.         */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-dur:         0ms;
+    --motion-dur-slow:    0ms;
+    --motion-dur-counter: 0ms;
+  }
+
+  /* Hero initial-load animations — show immediately, no movement */
+  .hero-left,
+  .hero-right {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Reveal — visible immediately, no transform, at most a 150ms fade */
+  .js-motion .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity 150ms ease !important;
+    transition-delay: 0ms !important;
+  }
+
+  /* Decorative ambient animations — stop entirely */
+  .c-blob,
+  .compliance-teaser::after,
+  .how-row::before,
+  .service-row::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
