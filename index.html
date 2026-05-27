@@ -54,30 +54,6 @@ body::before{
   padding:0 var(--pad);
 }
 
-/* ─── ANNOUNCEMENT BAR ────────────────────────────────────────────────────── */
-.announce{
-  background:rgba(0,0,0,0.02);
-  border-bottom:1px solid var(--border);
-  padding:9px var(--pad);
-  text-align:center;
-}
-.announce-inner{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  font-size:13px;
-  color:var(--text2);
-}
-.announce-badge{
-  font-size:10px;font-weight:500;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--text2);
-  background:rgba(0,0,0,0.05);
-  border:1px solid var(--border);
-  padding:3px 9px;border-radius:4px;
-  flex-shrink:0;
-}
-.announce-arrow{color:var(--text3);font-size:11px;}
 
 /* ─── NAV ─────────────────────────────────────────────────────────────────── */
 nav{
@@ -247,48 +223,6 @@ nav{
   to{opacity:0.95;transform:scale(1);}
 }
 
-/* ─── TRUST STRIP ─────────────────────────────────────────────────────────── */
-.trust{
-  border-bottom:1px solid var(--border);
-  padding:18px 0;
-  background:var(--bg2);
-}
-.trust-inner{
-  display:flex;align-items:center;gap:28px;
-}
-.trust-label{
-  font-size:11px;font-weight:500;
-  letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--text3);white-space:nowrap;flex-shrink:0;
-}
-.trust-divider{
-  width:1px;height:18px;
-  background:var(--border);flex-shrink:0;
-}
-.trust-entries{
-  display:flex;align-items:center;gap:36px;
-}
-.trust-entry{
-  display:flex;align-items:center;gap:9px;
-}
-.trust-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:#22c55e;flex-shrink:0;
-  box-shadow:0 0 6px rgba(34,197,94,0.5);
-}
-.trust-university{
-  font-family:'Cormorant Garamond',serif;
-  font-size:17px;font-weight:400;
-  color:rgba(10,10,10,0.78);letter-spacing:-0.01em;
-}
-.trust-tag{
-  font-size:10px;font-weight:500;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--text3);
-  background:rgba(34,197,94,0.08);
-  border:1px solid rgba(34,197,94,0.18);
-  padding:2px 7px;border-radius:3px;
-}
 
 /* ─── PROBLEM ─────────────────────────────────────────────────────────────── */
 .problem{
@@ -339,21 +273,20 @@ nav{
 }
 .prob-bar-head::-webkit-details-marker{display:none;}
 .prob-bar-head::marker{display:none;}
-.prob-bar-stat{
+.prob-bar-hl{
+  flex:1;display:flex;align-items:center;gap:24px;
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(38px,4vw,58px);
-  font-weight:300;line-height:0.9;
-  color:var(--text);flex-shrink:0;
-  white-space:nowrap;min-width:130px;
-}
-.prob-bar-title{
-  font-size:16px;font-weight:300;
-  color:var(--text2);flex:1;line-height:1.5;
-}
-.prob-bar-title--solo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(18px,2.1vw,26px);
+  font-size:clamp(20px,2.2vw,28px);
   font-weight:300;color:var(--text);line-height:1.2;
+}
+.prob-bar-num{
+  font-size:clamp(38px,4vw,56px);
+  font-weight:300;line-height:0.9;
+  flex-shrink:0;white-space:nowrap;
+}
+.prob-bar-sub{
+  font-size:clamp(14px,1.5vw,18px);
+  color:var(--text2);
 }
 .prob-bar-icon{
   flex-shrink:0;margin-left:auto;
@@ -375,25 +308,19 @@ nav{
 
 /* ─── MISSION STRIP ───────────────────────────────────────────────────────── */
 .mission{
-  padding:64px var(--pad);
+  padding:96px var(--pad);
   border-bottom:1px solid var(--border);
-  background:var(--bg2);
-  display:grid;
-  grid-template-columns:180px 1fr;
-  gap:64px;
-  align-items:start;
-}
-.mission-label{
-  font-size:10px;font-weight:500;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--text3);padding-top:8px;
+  background:var(--bg3);
+  text-align:center;
 }
 .mission-text{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(22px,2.6vw,32px);
+  font-size:clamp(28px,3.8vw,52px);
   font-weight:300;font-style:italic;
-  color:rgba(10,10,10,0.78);
-  line-height:1.45;letter-spacing:-0.01em;
+  color:var(--text);
+  line-height:1.3;letter-spacing:-0.02em;
+  max-width:820px;
+  margin:0 auto;
 }
 
 /* ─── HOW IT WORKS ────────────────────────────────────────────────────────── */
@@ -775,15 +702,11 @@ footer{
     max-width:100%;
   }
 
-  .trust-inner{gap:16px;}
-  .trust-entries{gap:20px;}
-
   .prob-bar-head{padding:20px;gap:16px;}
   .prob-bar-body{padding:0 20px 20px;}
-  .prob-bar-stat{min-width:auto;}
+  .prob-bar-hl{gap:16px;}
 
-  .mission{grid-template-columns:1fr;gap:16px;padding:52px var(--pad) 48px;}
-  .mission-label{display:none;}
+  .mission{padding:64px var(--pad);}
 
   .how-step{grid-template-columns:40px 1fr;padding:32px 0;}
   .step-info{grid-column:2;padding-right:0;}
@@ -810,15 +733,6 @@ footer{
 </style>
 </head>
 <body>
-
-<!-- ANNOUNCEMENT BAR -->
-<div class="announce">
-  <div class="announce-inner">
-    <span class="announce-badge">New</span>
-    Now live at the University of Utah. The first campus on Laika.
-    <span class="announce-arrow">→</span>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav>
@@ -864,21 +778,6 @@ footer{
   </div>
 </section>
 
-<!-- TRUST STRIP -->
-<div class="trust reveal">
-  <div class="trust-inner wrap">
-    <div class="trust-label">Live at</div>
-    <div class="trust-divider"></div>
-    <div class="trust-entries">
-      <div class="trust-entry">
-        <div class="trust-dot"></div>
-        <div class="trust-university">University of Utah</div>
-        <div class="trust-tag">Active</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- THE PROBLEM -->
 <section class="problem" id="problem">
   <div class="wrap">
@@ -888,8 +787,10 @@ footer{
 
       <details class="prob-bar reveal">
         <summary class="prob-bar-head">
-          <div class="prob-bar-stat">1 in 3</div>
-          <div class="prob-bar-title">lost items are never returned.</div>
+          <div class="prob-bar-hl">
+            <span class="prob-bar-num">1 in 3</span>
+            <span class="prob-bar-sub">lost items are never returned.</span>
+          </div>
           <div class="prob-bar-icon" aria-hidden="true">
             <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
@@ -901,7 +802,7 @@ footer{
 
       <details class="prob-bar reveal">
         <summary class="prob-bar-head">
-          <div class="prob-bar-title prob-bar-title--solo">Tracked on a cardboard box and a spreadsheet</div>
+          <div class="prob-bar-hl">Tracked on a cardboard box and a spreadsheet</div>
           <div class="prob-bar-icon" aria-hidden="true">
             <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
@@ -913,7 +814,7 @@ footer{
 
       <details class="prob-bar reveal">
         <summary class="prob-bar-head">
-          <div class="prob-bar-title prob-bar-title--solo">No one ever built a system for it</div>
+          <div class="prob-bar-hl">No one ever built a system for it</div>
           <div class="prob-bar-icon" aria-hidden="true">
             <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
@@ -929,7 +830,6 @@ footer{
 
 <!-- MISSION STRIP -->
 <div class="mission reveal">
-  <div class="mission-label">Our mission</div>
   <div class="mission-text">Every campus loses things. Most have no real system for getting them back. Laika is built for how universities actually work.</div>
 </div>
 
@@ -945,7 +845,7 @@ footer{
       <div class="step-n">01</div>
       <div class="step-info">
         <div class="step-name">Staff log found items<br>in 30 seconds</div>
-        <div class="step-desc">Photo goes in. AI generates a name, description, and value classification automatically. Staff confirm, add a location, and save. Most items are logged in under half a minute. No training required.</div>
+        <div class="step-desc">Take a photo. Laika generates the name, description, and category. Staff confirm, add a location, and save. Under 30 seconds. No training needed.</div>
       </div>
       <div class="step-visual">
         <img src="public/screenshots/staff-dashboard.png" alt="Staff dashboard showing logged lost items">
@@ -956,7 +856,7 @@ footer{
       <div class="step-n">02</div>
       <div class="step-info">
         <div class="step-name">Students search and<br>describe their item</div>
-        <div class="step-desc">Students visit the portal, describe what they lost in plain language, and browse the live inventory. High-value items stay blurred until the student can describe it from memory. Ownership is confirmed before anything is revealed.</div>
+        <div class="step-desc">Students describe what they lost and browse the live inventory. High-value items stay blurred until they prove ownership. Nothing is revealed before it is confirmed.</div>
       </div>
       <div class="step-visual">
         <img src="public/screenshots/student-portal.png" alt="Student portal for searching lost items">
@@ -967,7 +867,7 @@ footer{
       <div class="step-n">03</div>
       <div class="step-info">
         <div class="step-name">Ownership verified<br>before pickup</div>
-        <div class="step-desc">Staff review the submitted claim, confirm the description matches, and hand over the item in person with ID verification. A full audit trail runs from the moment an item is logged to the moment it leaves the desk.</div>
+        <div class="step-desc">Staff check the claim and hand over the item with ID verification. Every handover has a full audit trail.</div>
       </div>
       <div class="step-visual">
         <img src="public/screenshots/claim-pickup.png" alt="Claim and pickup verification screen">
@@ -981,8 +881,8 @@ footer{
   <div class="wrap">
     <div class="feat-head reveal">
       <div class="s-kicker">What Laika does</div>
-      <div class="feat-title">Built around<br>how campuses actually work.</div>
-      <p class="feat-sub">Five systems working together so nothing slips through: staff, students, administrators.</p>
+      <div class="feat-title">Five tools.<br>One system.</div>
+      <p class="feat-sub">For staff, for students, for the front desk.</p>
     </div>
 
     <div class="feat-grid" data-stagger="60">
@@ -1015,7 +915,7 @@ footer{
           <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
         <div class="feat-name">PIN-verified pickup</div>
-        <div class="feat-desc">Every handover requires student ID and a secure PIN. A complete audit trail is kept from the moment an item is logged to the moment it leaves the desk.</div>
+        <div class="feat-desc">Every handover requires student ID and a PIN. Full audit trail from log to pickup.</div>
       </div>
       <div class="feat-card reveal">
         <div class="feat-icon">
@@ -1051,9 +951,9 @@ footer{
 <!-- DEMO CTA -->
 <section class="demo-cta">
   <div class="wrap">
-    <div class="demo-cta-eyebrow reveal">Ready to get started</div>
-    <div class="demo-cta-title reveal">Ready to bring Laika<br>to your campus?</div>
-    <p class="demo-cta-sub reveal">We're working with universities now. Reach out to schedule a demo or ask a question. We'll get back to you the same day.</p>
+    <div class="demo-cta-eyebrow reveal">Get started</div>
+    <div class="demo-cta-title reveal">Bring Laika<br>to your campus.</div>
+    <p class="demo-cta-sub reveal">Schedule a demo or ask a question. We respond the same day.</p>
     <div class="demo-cta-btns reveal">
       <a href="#contact" class="btn-primary">Request a demo</a>
       <a href="mailto:eli@laikacampus.com" class="btn-secondary">Email us directly</a>
@@ -1067,7 +967,7 @@ footer{
     <div class="reveal">
       <div class="contact-label">Get in touch</div>
       <div class="contact-title">Let's talk about your campus.</div>
-      <p class="contact-sub">We're working with universities now. Reach out to schedule a demo or ask a question. We'll get back to you the same day.</p>
+      <p class="contact-sub">Schedule a demo or ask a question. We respond the same day.</p>
     </div>
     <div class="reveal">
       <form class="contact-form" id="contactForm" novalidate>
