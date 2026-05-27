@@ -136,32 +136,14 @@
   }
 
   /* ── Parallax ───────────────────────────────────────────────────────── */
-  /* Hero headline: scroll-relative. Illustrations: viewport-relative.   */
+  /* Subtle vertical shift on the hero headline only.                    */
   function initParallax() {
     if (reducedMotion) return;
-
     var heroH1 = document.getElementById('hero-h1');
-    if (heroH1) {
-      window.addEventListener('scroll', function () {
-        heroH1.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)';
-      }, { passive: true });
-    }
-
-    /* Viewport-relative parallax for decorative illustrations */
-    var illus = [
-      { el: document.querySelector('.demo-cta-illus img'),  factor: 0.05 },
-      { el: document.querySelector('.mission-illus img'),   factor: 0.04 }
-    ].filter(function (item) { return item.el; });
-
-    if (illus.length) {
-      window.addEventListener('scroll', function () {
-        illus.forEach(function (item) {
-          var rect = item.el.closest('[class$="-illus"]').getBoundingClientRect();
-          var offset = (window.innerHeight / 2 - (rect.top + rect.height / 2)) * item.factor;
-          item.el.style.transform = 'translateY(' + offset + 'px)';
-        });
-      }, { passive: true });
-    }
+    if (!heroH1) return;
+    window.addEventListener('scroll', function () {
+      heroH1.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)';
+    }, { passive: true });
   }
 
   /* ── Nav scroll state ──────────────────────────────────────────────── */
