@@ -477,16 +477,42 @@ nav{
   background:radial-gradient(circle, rgba(0,0,0,0.015) 0%, transparent 65%);
   filter:blur(80px);pointer-events:none;
 }
-.demo-cta-img{
-  position:absolute;bottom:-30px;right:-40px;
-  width:720px;height:auto;
-  mix-blend-mode:multiply;
-  opacity:0.75;
-  pointer-events:none;
-  user-select:none;
-  z-index:0;
+.demo-cta-illus{
+  position:absolute;bottom:-30px;left:-40px;
+  width:720px;z-index:0;pointer-events:none;
+}
+.demo-cta-illus::before{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to right, transparent 55%, var(--bg) 90%);
+}
+.demo-cta-illus::after{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to bottom, var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%);
+}
+.demo-cta-illus img{
+  width:100%;height:auto;display:block;
+  mix-blend-mode:multiply;opacity:0.8;
 }
 .demo-cta .wrap{position:relative;z-index:1;}
+
+/* ── Problem section wallet illustration ──────────────────────────── */
+.prob-illus{
+  position:absolute;bottom:-20px;right:-50px;
+  width:580px;z-index:0;pointer-events:none;
+}
+.prob-illus::before{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to left, transparent 55%, var(--bg) 90%);
+}
+.prob-illus::after{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to bottom, var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%);
+}
+.prob-illus img{
+  width:100%;height:auto;display:block;
+  mix-blend-mode:multiply;opacity:0.75;
+}
+.problem .wrap{position:relative;z-index:1;}
 .demo-cta-eyebrow{
   font-size:11px;font-weight:500;
   letter-spacing:0.18em;text-transform:uppercase;
@@ -717,6 +743,9 @@ footer{
 
 <!-- THE PROBLEM -->
 <section class="problem" id="problem">
+  <div class="prob-illus" aria-hidden="true">
+    <img src="lost-wallet.png" alt="">
+  </div>
   <div class="wrap">
     <div class="s-kicker reveal">The problem</div>
 
@@ -877,7 +906,9 @@ footer{
 
 <!-- DEMO CTA -->
 <section class="demo-cta">
-  <img class="demo-cta-img" src="laika-kid.png" alt="" aria-hidden="true">
+  <div class="demo-cta-illus" aria-hidden="true">
+    <img src="laika-kid.png" alt="">
+  </div>
   <div class="wrap">
     <div class="demo-cta-eyebrow reveal">Get started</div>
     <div class="demo-cta-title reveal">Bring Laika<br>to your campus.</div>
