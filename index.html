@@ -566,6 +566,33 @@ nav{
 .contact-sub{
   font-size:15px;font-weight:300;
   color:var(--text2);line-height:1.75;
+  margin-bottom:28px;
+}
+.contact-socials{
+  display:flex;flex-direction:column;gap:12px;
+}
+.contact-social-link{
+  display:inline-flex;align-items:center;gap:12px;
+  text-decoration:none;
+  color:var(--text);
+  transition:opacity 0.15s;
+}
+.contact-social-link:hover{opacity:0.6;}
+.contact-social-icon{
+  width:36px;height:36px;flex-shrink:0;
+  border:1px solid var(--border);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg2);
+}
+.contact-social-icon svg{width:18px;height:18px;}
+.contact-social-name{
+  font-size:16px;font-weight:400;
+  letter-spacing:0.01em;
+}
+.contact-social-handle{
+  font-size:12px;font-weight:300;
+  color:var(--text3);
+  margin-left:2px;
 }
 /* Contact form dark style */
 .contact-form{display:flex;flex-direction:column;gap:12px;width:100%;}
@@ -946,6 +973,28 @@ footer{
       <div class="contact-label">Get in touch</div>
       <div class="contact-title">Let's talk.</div>
       <p class="contact-sub">Schedule a demo or ask a question. We respond the same day.</p>
+      <div class="contact-socials">
+        <a href="https://www.linkedin.com/company/laika-campus/?viewAsMember=true" class="contact-social-link" target="_blank" rel="noopener">
+          <span class="contact-social-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="2" y="9" width="4" height="12" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="4" cy="4" r="2" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="contact-social-name">LinkedIn<span class="contact-social-handle"> · laika-campus</span></span>
+        </a>
+        <a href="https://www.instagram.com/laika_campus" class="contact-social-link" target="_blank" rel="noopener">
+          <span class="contact-social-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="12" r="4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="17.5" cy="6.5" r="0.75" fill="#0a0a0a"/>
+            </svg>
+          </span>
+          <span class="contact-social-name">Instagram<span class="contact-social-handle"> · @laika_campus</span></span>
+        </a>
+      </div>
     </div>
     <div class="reveal">
       <form class="contact-form" id="contactForm" novalidate>
