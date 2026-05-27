@@ -454,30 +454,28 @@ nav{
 
 /* ─── COMPLIANCE ──────────────────────────────────────────────────────────── */
 .compliance{
-  padding:100px 0;
+  padding:80px 0;
   border-bottom:1px solid var(--border);
   background:var(--bg2);
 }
-.comp-title{
-  font-family:'Inter',sans-serif;
-  font-size:clamp(28px,3.2vw,44px);
-  font-weight:300;color:var(--text);
-  letter-spacing:-0.02em;line-height:1.1;
-  margin-bottom:24px;
-  max-width:600px;
+.comp-tabs{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
 }
-.comp-doc-cta{
-  font-size:16px;font-weight:300;
-  color:var(--text);line-height:1.7;
-  max-width:560px;
-}
-.comp-doc-cta a{
+.comp-tab{
+  font-size:13px;font-weight:400;
   color:var(--text);
-  text-decoration:underline;
-  text-underline-offset:3px;
+  border:1px solid rgba(0,0,0,0.15);
+  border-radius:100px;
+  padding:10px 20px;
+  white-space:nowrap;
+}
+.comp-tab-cta{
+  text-decoration:none;
+  background:var(--text);color:var(--bg);
+  border-color:var(--text);
   transition:opacity 0.15s;
 }
-.comp-doc-cta a:hover{opacity:0.6;}
+.comp-tab-cta:hover{opacity:0.75;}
 
 /* ─── DEMO CTA ────────────────────────────────────────────────────────────── */
 .demo-cta{
@@ -662,7 +660,7 @@ footer{
   .feat-grid{grid-template-columns:1fr 1fr;}
   .feat-grid-2{grid-template-columns:1fr;max-width:100%;}
 
-  .compliance{padding:64px 0;}
+  .compliance{padding:52px 0;}
 
   .contact-inner{grid-template-columns:1fr;gap:40px;}
   .demo-cta{padding:80px 0;}
@@ -876,9 +874,13 @@ footer{
 <!-- COMPLIANCE -->
 <section class="compliance" id="compliance">
   <div class="wrap">
-    <div class="s-kicker reveal">Compliance</div>
-    <div class="comp-title reveal">Built for university requirements.</div>
-    <p class="comp-doc-cta reveal">ADA, FERPA, HECVAT, and data security. <a href="#contact">Get in touch</a> for the details.</p>
+    <div class="comp-tabs reveal">
+      <span class="comp-tab">ADA / WCAG 2.1 AA</span>
+      <span class="comp-tab">FERPA</span>
+      <span class="comp-tab">HECVAT</span>
+      <span class="comp-tab">SOC 2</span>
+      <a href="#contact" class="comp-tab comp-tab-cta">Get in touch to learn more</a>
+    </div>
   </div>
 </section>
 
