@@ -24,7 +24,7 @@
   /* ── Reveal ─────────────────────────────────────────────────────────── */
   /* One-shot: element is unobserved after first intersection.            */
   function initReveal() {
-    var elements = document.querySelectorAll('.reveal');
+    var elements = document.querySelectorAll('.reveal, .reveal-scale');
     if (!elements.length) return;
 
     if (reducedMotion) {
@@ -46,14 +46,14 @@
 
   /* ── Stagger groups ─────────────────────────────────────────────────── */
   /* [data-stagger="N"] on a parent; N = ms between children (default 80)  */
-  /* Children must have class="reveal" to participate.                    */
+  /* Children must have class="reveal" or "reveal-scale" to participate.  */
   function initStaggerGroups() {
     var groups = document.querySelectorAll('[data-stagger]');
     if (!groups.length) return;
 
     if (reducedMotion) {
       groups.forEach(function (group) {
-        group.querySelectorAll('.reveal').forEach(function (el) {
+        group.querySelectorAll('.reveal, .reveal-scale').forEach(function (el) {
           el.classList.add('on');
         });
       });
@@ -61,7 +61,7 @@
     }
 
     groups.forEach(function (group) {
-      var children = Array.from(group.querySelectorAll('.reveal'));
+      var children = Array.from(group.querySelectorAll('.reveal, .reveal-scale'));
       var interval = parseInt(group.dataset.stagger || '80', 10);
 
       var obs = new IntersectionObserver(function (entries) {
@@ -134,13 +134,34 @@
   }
 
   /* ── Parallax ───────────────────────────────────────────────────────── */
-  /* Subtle vertical shift on the hero headline during scroll.           */
+  /* Subtle vertical shift on the hero headline and illustration.        */
   function initParallax() {
     if (reducedMotion) return;
-    var heroH1 = document.getElementById('hero-h1');
-    if (!heroH1) return;
+    var heroH1  = document.getElementById('hero-h1');
+    var heroImg = document.querySelector('.hero-img');
     window.addEventListener('scroll', function () {
-      heroH1.style.transform = 'translateY(' + (window.scrollY * 0.18) + 'px)';
+      var y = window.scrollY;
+      if (heroH1)  heroH1.style.transform  = 'translateY(' + (y * 0.18) + 'px)';
+      if (heroImg) heroImg.style.transform = 'translateY(' + (y * 0.08) + 'px)';
+    }, { passive: true });
+  }
+
+  /* ── Nav scroll state ──────────────────────────────────────────────── */
+  function initNavScroll() {
+    var nav = document.querySelector('nav');
+    if (!nav) return;
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  }
+
+  /* ── Scroll progress bar ───────────────────────────────────────────── */
+  function initScrollProgress() {
+    var bar = document.querySelector('.scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? Math.min(window.scrollY / max, 1) * 100 : 0) + '%';
     }, { passive: true });
   }
 
@@ -164,6 +185,8 @@
     initStaggerGroups();
     initCounters();
     initParallax();
+    initNavScroll();
+    initScrollProgress();
     initSmoothScroll();
   });
 }());
