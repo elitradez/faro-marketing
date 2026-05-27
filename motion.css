@@ -62,8 +62,12 @@
   }
 
   /* Hero initial-load animations — show immediately, no movement */
-  .hero-left,
-  .hero-right {
+  .hero-img-panel,
+  .hero-kicker,
+  .hero-content h1,
+  .hero-mission,
+  .hero-actions,
+  .stat-block {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

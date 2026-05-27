@@ -97,55 +97,55 @@ nav{
 
 /* ─── HERO ─── */
 .hero{
-  padding:140px 56px 100px;
-  position:relative;overflow:hidden;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0;
-  align-items:center;
-  border-bottom:1px solid var(--rule);
+  grid-template-columns:55fr 45fr;
+  min-height:100vh;
+  background:#0c0c0c;
+  overflow:hidden;
 }
 
-/* Diagonal split background */
-.hero::before{
-  content:'';
-  position:absolute;
-  top:0;right:0;bottom:0;
-  width:52%;
-  background:var(--off);
-  clip-path:polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
-  z-index:0;
+.hero-img-panel{
+  position:relative;
+  overflow:hidden;
+  background:#1a1410;
+  animation:laika-img-settle 1.6s 0.05s var(--motion-ease) both;
 }
 
-.hero-grid{display:none;}
-
-/* Lighthouse in bottom-right of hero panel */
-.hero-logo-bg{
-  position:absolute;
-  right:32px;bottom:32px;
-  height:380px;width:auto;
-  opacity:0.22;
-  z-index:2;
-  pointer-events:none;
-  user-select:none;
+@keyframes laika-img-settle{
+  from{opacity:0.4;transform:scale(1.04);}
+  to{opacity:1;transform:scale(1);}
 }
 
-.hero-left{
+.hero-img-fill{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#1e1a15 0%,#2b2018 40%,#1a1410 70%,#0e0c0a 100%);
+}
+
+.hero-img-fade{
+  position:absolute;inset:0;
+  background:linear-gradient(to right, transparent 55%, #0c0c0c 100%);
+  z-index:1;
+}
+
+.hero-content{
+  background:#0c0c0c;
+  padding:140px 64px 80px 48px;
+  display:flex;flex-direction:column;
+  justify-content:center;
   position:relative;z-index:2;
-  padding-right:64px;
-  animation:laika-up 0.8s ease both;
 }
 
 .hero-kicker{
   font-size:10px;font-weight:500;
   letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--muted);
+  color:rgba(245,243,239,0.35);
   margin-bottom:40px;
   display:flex;align-items:center;gap:14px;
+  animation:laika-up 0.7s 0.1s var(--motion-ease) both;
 }
 .hero-kicker::before{
   content:'';width:36px;height:1px;
-  background:var(--muted);display:inline-block;
+  background:rgba(245,243,239,0.2);display:inline-block;
   flex-shrink:0;
 }
 
@@ -161,75 +161,68 @@ h1{
 }
 h1 em{font-style:italic;font-weight:300;}
 
-/* large decorative year/label */
-.hero-tag{
-  margin-top:36px;
-  font-size:11px;font-weight:400;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);
-  display:flex;align-items:center;gap:10px;
-}
-.hero-tag::after{content:'';flex:1;height:1px;background:var(--rule);}
-
-.hero-right{
-  position:relative;z-index:2;
-  padding-left:88px;
-  animation:laika-up 0.8s 0.1s ease both;
+.hero-content h1{
+  color:#f5f3ef;
+  animation:laika-up 0.7s 0.22s var(--motion-ease) both;
 }
 
 .hero-mission{
-  font-size:18px;
-  color:var(--muted2);
+  font-size:17px;
+  color:rgba(245,243,239,0.48);
   font-weight:300;
   line-height:1.75;
+  margin-top:32px;
   margin-bottom:40px;
-  max-width:420px;
+  max-width:400px;
+  animation:laika-up 0.7s 0.38s var(--motion-ease) both;
 }
-.hero-mission strong{color:var(--text);font-weight:500;}
+.hero-mission strong{color:rgba(245,243,239,0.75);font-weight:400;}
 
 .hero-actions{
   display:flex;align-items:center;gap:14px;
   margin-bottom:56px;
+  animation:laika-up 0.7s 0.5s var(--motion-ease) both;
 }
 
 .btn-dark{
-  background:var(--ink);color:var(--off);
+  background:#f5f3ef;color:#0c0c0c;
   padding:14px 28px;border-radius:5px;
   font-size:14px;font-weight:500;
   text-decoration:none;
   transition:background 0.18s,transform 0.15s,box-shadow 0.18s;
 }
 .btn-dark:hover{
-  background:#2a2825;
+  background:#ede9e2;
   transform:translateY(-2px) scale(1.02);
-  box-shadow:0 6px 18px rgba(10,10,13,0.2);
+  box-shadow:0 6px 18px rgba(0,0,0,0.35);
 }
 
 .btn-ghost{
   font-size:14px;font-weight:400;
-  color:var(--muted2);text-decoration:none;
-  border-bottom:1px solid var(--rule);
+  color:rgba(245,243,239,0.4);text-decoration:none;
+  border-bottom:1px solid rgba(245,243,239,0.15);
   padding-bottom:2px;
   transition:color 0.18s,border-color 0.18s;
 }
-.btn-ghost:hover{color:var(--ink);border-color:var(--muted2);}
+.btn-ghost:hover{color:#f5f3ef;border-color:rgba(245,243,239,0.4);}
 
 /* stat */
 .stat-block{
   display:flex;align-items:flex-end;gap:18px;
   padding-top:28px;
-  border-top:1px solid var(--rule);
+  border-top:1px solid rgba(245,243,239,0.08);
+  animation:laika-up 0.7s 0.6s var(--motion-ease) both;
 }
 
 .stat-number{
   font-family:'Cormorant Garamond',serif;
   font-size:60px;font-weight:300;font-style:italic;
-  color:var(--ink);line-height:0.88;
+  color:#f5f3ef;line-height:0.88;
 }
 
 .stat-caption{
   font-size:11px;font-weight:400;
-  color:var(--muted);
+  color:rgba(245,243,239,0.3);
   letter-spacing:0.06em;text-transform:uppercase;
   line-height:1.55;padding-bottom:5px;
 }
@@ -768,13 +761,18 @@ footer{
   .nav-link{display:none;}
   .hero{
     grid-template-columns:1fr;
-    padding:100px 24px 64px;
-    gap:48px;
+    min-height:auto;
   }
-  .hero::before{display:none;}
-  .hero-grid{display:none;}
-  .hero-left{padding-right:0;}
-  .hero-right{padding-left:0;}
+  .hero-img-panel{
+    height:260px;
+    animation:none;opacity:1;transform:none;
+  }
+  .hero-img-fade{
+    background:linear-gradient(to bottom, transparent 40%, #0c0c0c 100%);
+  }
+  .hero-content{
+    padding:48px 24px 64px;
+  }
   .problem{padding:64px 24px;}
   .problem-stats{grid-template-columns:1fr;}
   .problem-stat{border-right:none;border-bottom:1px solid rgba(245,243,239,0.07);padding:40px 24px;}
@@ -821,17 +819,14 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid"></div>
-
-  <!-- Lighthouse -->
-  <img class="hero-logo-bg" src="faro-lighthouse.png" alt="" aria-hidden="true">
-
-  <div class="hero-left">
-    <div class="hero-kicker">Campus lost &amp; found</div>
-    <h1 id="hero-h1">Lost and found<br>built for<br><em>universities.</em></h1>
+  <div class="hero-img-panel" aria-hidden="true">
+    <div class="hero-img-fill"></div>
+    <div class="hero-img-fade"></div>
   </div>
 
-  <div class="hero-right">
+  <div class="hero-content">
+    <div class="hero-kicker">Campus lost &amp; found</div>
+    <h1 id="hero-h1">Lost and found<br>built for<br><em>universities.</em></h1>
     <p class="hero-mission">
       Most campuses are still running lost and found on <strong>a cardboard box and a shared spreadsheet.</strong> Staff log items in seconds, students find their things online, and every pickup is verified.
     </p>
