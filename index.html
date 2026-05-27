@@ -463,28 +463,11 @@ nav{
   font-size:clamp(28px,3.2vw,44px);
   font-weight:300;color:var(--text);
   letter-spacing:-0.02em;line-height:1.1;
-  margin-bottom:40px;
+  margin-bottom:24px;
   max-width:600px;
 }
-.comp-claims{
-  list-style:none;
-  margin-bottom:36px;
-  display:flex;flex-direction:column;gap:16px;
-  max-width:640px;
-}
-.comp-claims li{
-  font-size:16px;font-weight:300;
-  color:var(--text);line-height:1.65;
-  padding-left:22px;position:relative;
-}
-.comp-claims li::before{
-  content:'';
-  position:absolute;left:0;top:12px;
-  width:10px;height:1px;
-  background:var(--text);
-}
 .comp-doc-cta{
-  font-size:14px;font-weight:300;
+  font-size:16px;font-weight:300;
   color:var(--text);line-height:1.7;
   max-width:560px;
 }
@@ -894,14 +877,8 @@ footer{
 <section class="compliance" id="compliance">
   <div class="wrap">
     <div class="s-kicker reveal">Compliance</div>
-    <div class="comp-title reveal">Meets the standards<br>universities require.</div>
-    <ul class="comp-claims">
-      <li class="reveal">ADA / WCAG 2.1 AA: accessible to every student and staff member.</li>
-      <li class="reveal">FERPA-ready: student data isolated per institution, never shared or sold.</li>
-      <li class="reveal">Hosted on Vercel and Supabase, both SOC 2 Type II certified.</li>
-      <li class="reveal">All data encrypted at rest and in transit.</li>
-    </ul>
-    <p class="comp-doc-cta reveal">For full security and compliance documentation, including HECVAT and DPA, <a href="#contact">get in touch</a>.</p>
+    <div class="comp-title reveal">Built for university requirements.</div>
+    <p class="comp-doc-cta reveal">ADA, FERPA, HECVAT, and data security. <a href="#contact">Get in touch</a> for the details.</p>
   </div>
 </section>
 
