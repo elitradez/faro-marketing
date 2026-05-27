@@ -316,50 +316,61 @@ nav{
   background:var(--text3);display:inline-block;flex-shrink:0;
 }
 
-.prob-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:0;border:1px solid var(--border);
-  border-radius:12px;overflow:hidden;
-  margin-bottom:72px;position:relative;z-index:1;
+/* ─── PROBLEM BARS ────────────────────────────────────────────────────────── */
+.prob-bars{
+  display:flex;flex-direction:column;gap:8px;
 }
-.prob-stat{
-  padding:48px 40px;
-  border-right:1px solid var(--border);
-  background:var(--surface);
+.prob-bar{
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:12px;background:var(--bg);
+  overflow:hidden;
+  transition:border-color 0.18s,background 0.18s;
 }
-.prob-stat:last-child{border-right:none;}
-.prob-num{
+.prob-bar:hover{
+  border-color:rgba(0,0,0,0.12);background:var(--bg2);
+}
+.prob-bar[open]{
+  background:var(--bg2);border-color:rgba(0,0,0,0.1);
+}
+.prob-bar-head{
+  display:flex;align-items:center;gap:24px;
+  padding:28px 32px;cursor:pointer;list-style:none;
+  user-select:none;-webkit-user-select:none;
+}
+.prob-bar-head::-webkit-details-marker{display:none;}
+.prob-bar-head::marker{display:none;}
+.prob-bar-stat{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(52px,5.8vw,78px);
+  font-size:clamp(38px,4vw,58px);
   font-weight:300;line-height:0.9;
-  letter-spacing:-0.03em;color:var(--text);
-  margin-bottom:16px;
+  color:var(--text);flex-shrink:0;
+  white-space:nowrap;min-width:130px;
 }
-.prob-num em{font-style:italic;color:var(--text3);}
-.prob-label{
-  font-size:13px;font-weight:300;
-  color:var(--text2);line-height:1.65;max-width:200px;
+.prob-bar-title{
+  font-size:16px;font-weight:300;
+  color:var(--text2);flex:1;line-height:1.5;
 }
-
-.prob-statement{
-  display:grid;grid-template-columns:180px 1fr;
-  gap:64px;align-items:start;
-  position:relative;z-index:1;
-}
-.prob-tag{
-  font-size:10px;font-weight:500;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--text3);padding-top:6px;line-height:1.7;
-}
-.prob-text{
+.prob-bar-title--solo{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(20px,2.2vw,28px);
-  font-weight:300;
-  color:rgba(10,10,10,0.68);
-  line-height:1.5;letter-spacing:-0.01em;
+  font-size:clamp(18px,2.1vw,26px);
+  font-weight:300;color:var(--text);line-height:1.2;
 }
-.prob-text strong{
-  font-weight:400;font-style:italic;color:var(--text);
+.prob-bar-icon{
+  flex-shrink:0;margin-left:auto;
+  width:28px;height:28px;
+  border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text3);
+  transition:transform 0.22s var(--motion-ease),background 0.18s;
+}
+.prob-bar[open] .prob-bar-icon{
+  transform:rotate(45deg);background:var(--bg3);
+}
+.prob-bar-body{
+  padding:0 32px 28px;
+  font-size:14px;font-weight:300;
+  color:var(--text2);line-height:1.75;
+  max-width:660px;
 }
 
 /* ─── MISSION STRIP ───────────────────────────────────────────────────────── */
@@ -767,11 +778,9 @@ footer{
   .trust-inner{gap:16px;}
   .trust-entries{gap:20px;}
 
-  .prob-grid{grid-template-columns:1fr;}
-  .prob-stat{border-right:none;border-bottom:1px solid var(--border);padding:36px 24px;}
-  .prob-stat:last-child{border-bottom:none;}
-  .prob-statement{grid-template-columns:1fr;gap:16px;}
-  .prob-tag{display:none;}
+  .prob-bar-head{padding:20px;gap:16px;}
+  .prob-bar-body{padding:0 20px 20px;}
+  .prob-bar-stat{min-width:auto;}
 
   .mission{grid-template-columns:1fr;gap:16px;padding:52px var(--pad) 48px;}
   .mission-label{display:none;}
@@ -806,7 +815,7 @@ footer{
 <div class="announce">
   <div class="announce-inner">
     <span class="announce-badge">New</span>
-    Now live at the University of Utah — the first campus on Laika.
+    Now live at the University of Utah. The first campus on Laika.
     <span class="announce-arrow">→</span>
   </div>
 </div>
@@ -875,25 +884,45 @@ footer{
   <div class="wrap">
     <div class="s-kicker reveal">The problem</div>
 
-    <div class="prob-grid" data-stagger="80">
-      <div class="prob-stat reveal">
-        <div class="prob-num">A third</div>
-        <div class="prob-label">of lost items are never returned — a general pattern wherever there's no real system in place, not a campus-specific number.</div>
-      </div>
-      <div class="prob-stat reveal">
-        <div class="prob-num">Hours.</div>
-        <div class="prob-label">Staff spend hours each week chasing lost items by hand — phone calls, email threads, handwritten logs with no central record.</div>
-      </div>
-    </div>
+    <div class="prob-bars" data-stagger="80">
 
-    <div class="prob-statement reveal">
-      <div class="prob-tag">The current<br>solution</div>
-      <div class="prob-text">
-        The standard approach: <strong>a cardboard box behind the front desk and a spreadsheet nobody updates.</strong>
-        Universities run billion-dollar research programs and process thousands of students a day.
-        Lost property still gets tracked on a Post-it note. It's not a resources problem.
-        No one ever built a system for it.
-      </div>
+      <details class="prob-bar reveal">
+        <summary class="prob-bar-head">
+          <div class="prob-bar-stat">1 in 3</div>
+          <div class="prob-bar-title">lost items are never returned.</div>
+          <div class="prob-bar-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="prob-bar-body">A general pattern wherever there is no real system in place. Not a campus-specific number.</div>
+      </details>
+
+      <details class="prob-bar reveal">
+        <summary class="prob-bar-head">
+          <div class="prob-bar-title prob-bar-title--solo">Tracked on a cardboard box and a spreadsheet</div>
+          <div class="prob-bar-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="prob-bar-body">Phone calls, email threads, handwritten logs. No central record. Staff lose hours every week chasing items by hand.</div>
+      </details>
+
+      <details class="prob-bar reveal">
+        <summary class="prob-bar-head">
+          <div class="prob-bar-title prob-bar-title--solo">No one ever built a system for it</div>
+          <div class="prob-bar-icon" aria-hidden="true">
+            <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="prob-bar-body">Universities run billion-dollar research programs and process thousands of students a day. Lost property still gets a Post-it note. It is not a resources problem.</div>
+      </details>
+
     </div>
   </div>
 </section>
@@ -953,7 +982,7 @@ footer{
     <div class="feat-head reveal">
       <div class="s-kicker">What Laika does</div>
       <div class="feat-title">Built around<br>how campuses actually work.</div>
-      <p class="feat-sub">Five systems working together so nothing slips through — for staff, for students, for administrators.</p>
+      <p class="feat-sub">Five systems working together so nothing slips through: staff, students, administrators.</p>
     </div>
 
     <div class="feat-grid" data-stagger="60">
@@ -969,7 +998,7 @@ footer{
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
         <div class="feat-name">Plain-language search</div>
-        <div class="feat-desc">Students describe what they lost in their own words. Laika matches it against the live inventory — no exact-match required. High-value items stay blurred until ownership is confirmed.</div>
+        <div class="feat-desc">Students describe what they lost in their own words. Laika matches it against the live inventory with no exact match required. High-value items stay blurred until ownership is confirmed.</div>
       </div>
       <div class="feat-card reveal">
         <div class="feat-icon">
@@ -1006,7 +1035,7 @@ footer{
   <div class="comp-left reveal">
     <div class="comp-label">Compliance</div>
     <div class="comp-title">Built to meet<br>university <em>standards.</em></div>
-    <p class="comp-body">Universities have real legal obligations around the software they deploy. Laika meets those standards — ADA, FERPA, HECVAT, and more. We handle the compliance overhead so you don't have to.</p>
+    <p class="comp-body">Universities have real legal obligations around the software they deploy. Laika meets those standards: ADA, FERPA, HECVAT, and more. We handle the compliance overhead so you don't have to.</p>
   </div>
   <div class="comp-right reveal">
     <div class="comp-tags">
