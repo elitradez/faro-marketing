@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laika · Compliance</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="motion.css">
 <script>document.documentElement.classList.add('js-motion');</script>
 <style>
@@ -12,22 +12,16 @@
 html{scroll-behavior:smooth}
 
 :root{
-  --ink:#0a0a0d;
-  --ink2:#13131a;
-  --off:#f5f3ef;
-  --offwarm:#ede9e3;
-  --rule:rgba(10,10,13,0.1);
-  --rule2:rgba(10,10,13,0.06);
-  --muted:#9a9690;
-  --muted2:#6b6860;
-  --text:#2a2825;
-  --p:#7c3aed;
+  --text:#0a0a0a;
+  --bg:#ffffff;
+  --bg2:#f9f9fb;
+  --border:rgba(0,0,0,0.1);
 }
 
 body{
-  background:var(--off);
+  background:var(--bg);
   color:var(--text);
-  font-family:'DM Sans',-apple-system,sans-serif;
+  font-family:'Inter',-apple-system,sans-serif;
   font-size:16px;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
@@ -38,431 +32,149 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   padding:0 56px;height:60px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(245,243,239,0.88);
+  background:rgba(255,255,255,0.88);
   backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--rule);
+  border-bottom:1px solid var(--border);
 }
 
 .nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;font-weight:400;
-  color:var(--ink);text-decoration:none;
-  letter-spacing:0.08em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:16px;font-weight:600;
+  color:var(--text);text-decoration:none;
   display:flex;align-items:center;gap:8px;
 }
-.nav-logo-mark{
-  width:22px;height:22px;display:block;
-}
+.nav-logo-mark{width:22px;height:22px;display:block;}
 
 .nav-back{
   font-size:13px;font-weight:400;
-  color:var(--muted2);text-decoration:none;
+  color:rgba(10,10,10,0.45);text-decoration:none;
   transition:color 0.15s;
   display:flex;align-items:center;gap:6px;
 }
-.nav-back:hover{color:var(--ink);}
+.nav-back:hover{color:var(--text);}
 
-/* HEADER */
-.page-header{
-  padding:120px 56px 72px;
-  border-bottom:1px solid var(--rule);
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  align-items:end;
+/* MAIN */
+main{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:120px 24px 80px;
 }
 
-.header-kicker{
+.gate{
+  max-width:480px;
+  text-align:center;
+}
+
+.gate-eyebrow{
   font-size:11px;font-weight:500;
   letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--muted);
+  color:rgba(10,10,10,0.4);
   margin-bottom:24px;
-  display:flex;align-items:center;gap:10px;
 }
-.header-kicker::before{content:'';display:inline-block;width:24px;height:1px;background:var(--muted);}
 
-h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(44px,5.5vw,68px);
-  font-weight:300;
-  line-height:1.02;
+.gate-heading{
+  font-size:clamp(28px,4vw,40px);
+  font-weight:500;
+  line-height:1.1;
   letter-spacing:-0.02em;
-  color:var(--ink);
+  margin-bottom:20px;
 }
 
-h1 em{font-style:italic;}
-
-.header-note{
-  font-size:15px;color:var(--muted2);
-  font-weight:300;line-height:1.75;
-  align-self:end;
+.gate-body{
+  font-size:15px;
+  font-weight:300;
+  line-height:1.75;
+  color:rgba(10,10,10,0.6);
+  margin-bottom:36px;
 }
 
-/* COMPLIANCE ITEMS */
-.compliance-section{
-  border-bottom:1px solid var(--rule);
-  display:grid;
-  grid-template-columns:280px 1fr;
-}
-
-.comp-left{
-  padding:56px 40px;
-  border-right:1px solid var(--rule);
-  position:sticky;top:60px;
-  align-self:start;
-}
-
-.comp-tag{
-  font-size:10px;font-weight:500;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:12px;
-}
-
-.comp-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:26px;font-weight:400;
-  color:var(--ink);
-  letter-spacing:-0.01em;
-  line-height:1.2;
-  margin-bottom:16px;
-}
-
-.comp-status{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:500;
-  letter-spacing:0.06em;text-transform:uppercase;
-}
-
-.status-dot{
-  width:6px;height:6px;border-radius:50%;
-}
-
-.status-ready .status-dot{background:#22c55e;}
-.status-ready{color:#166534;}
-.status-progress .status-dot{background:#f59e0b;}
-.status-progress{color:#92400e;}
-
-.comp-right{
-  padding:56px 56px;
-}
-
-.comp-headline{
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;font-weight:400;
-  color:var(--ink);
-  letter-spacing:-0.01em;
-  margin-bottom:16px;
-  line-height:1.3;
-}
-
-.comp-body{
-  font-size:14px;color:var(--muted2);
-  font-weight:300;line-height:1.85;
-  margin-bottom:32px;
-  max-width:560px;
-}
-
-.comp-details{
-  display:flex;flex-direction:column;gap:0;
-  border:1px solid var(--rule);
-  border-radius:6px;
-  overflow:hidden;
-}
-
-.comp-detail-row{
-  display:grid;
-  grid-template-columns:180px 1fr;
-  border-bottom:1px solid var(--rule);
-}
-.comp-detail-row:last-child{border-bottom:none;}
-
-.comp-detail-label{
-  padding:14px 18px;
-  font-size:11px;font-weight:500;
-  letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--muted);
-  border-right:1px solid var(--rule);
-  background:var(--offwarm);
-}
-
-.comp-detail-value{
-  padding:14px 18px;
-  font-size:13px;color:var(--text);
-  font-weight:300;line-height:1.6;
-}
-
-/* CONTACT STRIP */
-.contact-strip{
-  background:var(--ink);
-  padding:72px 56px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:48px;
-}
-
-.cs-left{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(24px,3vw,36px);
-  font-weight:300;font-style:italic;
-  color:var(--off);
-  line-height:1.2;
-  letter-spacing:-0.01em;
-}
-
-.cs-right{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
-
-.btn-light{
+.gate-cta{
   display:inline-flex;align-items:center;
-  background:var(--off);color:var(--ink);
-  padding:13px 26px;border-radius:5px;
+  background:var(--text);color:#ffffff;
+  padding:14px 28px;border-radius:6px;
   font-size:14px;font-weight:500;
   text-decoration:none;
-  transition:background 0.15s,transform 0.12s;
+  transition:opacity 0.15s;
+  margin-bottom:16px;
 }
-.btn-light:hover{background:#fff;transform:translateY(-2px);}
+.gate-cta:hover{opacity:0.8;}
 
-.cs-email{
-  font-size:12px;color:rgba(245,243,239,0.35);
-  text-decoration:none;letter-spacing:0.04em;
+.gate-email{
+  display:block;
+  font-size:12px;
+  color:rgba(10,10,10,0.35);
+  text-decoration:none;
+  letter-spacing:0.04em;
   transition:color 0.15s;
 }
-.cs-email:hover{color:rgba(245,243,239,0.7);}
+.gate-email:hover{color:var(--text);}
+
+.gate-pills{
+  display:flex;flex-wrap:wrap;gap:8px;
+  justify-content:center;
+  margin-bottom:36px;
+}
+
+.gate-pill{
+  font-size:12px;font-weight:400;
+  color:rgba(10,10,10,0.5);
+  border:1px solid rgba(0,0,0,0.12);
+  border-radius:100px;
+  padding:6px 14px;
+  white-space:nowrap;
+}
 
 /* FOOTER */
 footer{
-  background:var(--ink);
-  border-top:1px solid rgba(245,243,239,0.07);
+  background:var(--text);
   padding:20px 56px;
   display:flex;align-items:center;justify-content:space-between;
 }
 
 .footer-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:16px;font-weight:300;
-  color:rgba(245,243,239,0.3);
-  letter-spacing:0.08em;text-transform:uppercase;
+  font-size:15px;font-weight:600;
+  color:rgba(255,255,255,0.3);
 }
 
-.footer-copy{font-size:11px;color:rgba(245,243,239,0.22);letter-spacing:0.04em;}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.04em;}
 
-/* ANIMATIONS — .reveal, .d1/.d2, and reduced-motion guard live in motion.css */
-
-/* RESPONSIVE */
-@media(max-width:800px){
-  nav{padding:0 24px;}
-  .page-header{grid-template-columns:1fr;padding:100px 24px 48px;gap:24px;}
-  .compliance-section{grid-template-columns:1fr;}
-  .comp-left{position:static;border-right:none;border-bottom:1px solid var(--rule);padding:36px 24px 28px;}
-  .comp-right{padding:32px 24px 48px;}
-  .comp-detail-row{grid-template-columns:1fr;}
-  .comp-detail-label{border-right:none;border-bottom:1px solid var(--rule);}
-  .contact-strip{flex-direction:column;padding:48px 24px;align-items:flex-start;}
-  .cs-right{align-items:flex-start;}
-  footer{padding:18px 24px;flex-direction:column;gap:8px;text-align:center;}
+@media(max-width:600px){
+  nav{padding:0 20px;}
+  footer{padding:18px 20px;flex-direction:column;gap:8px;text-align:center;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <svg class="nav-logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="14" cy="14" r="13.5" stroke="#0a0a0d" stroke-opacity="0.15"/>
-      <circle cx="14" cy="14" r="3" fill="#0a0a0d" opacity="0.7"/>
-    </svg>
+    <img class="nav-logo-mark" src="faro-lighthouse.png" alt="" aria-hidden="true">
     Laika
   </a>
   <a href="index.html" class="nav-back">← Back to home</a>
 </nav>
 
-<!-- HEADER -->
-<div class="page-header">
-  <div>
-    <div class="header-kicker">Compliance & security</div>
-    <h1>Built to meet<br>university <em>standards.</em></h1>
+<main>
+  <div class="gate reveal">
+    <div class="gate-eyebrow">Compliance</div>
+    <h1 class="gate-heading">Documentation available on request.</h1>
+    <p class="gate-body">Laika is built to meet the standards universities require for software procurement. Get in touch and we'll share what your IT and procurement teams need.</p>
+    <div class="gate-pills">
+      <span class="gate-pill">ADA / WCAG 2.1 AA</span>
+      <span class="gate-pill">FERPA</span>
+      <span class="gate-pill">HECVAT</span>
+      <span class="gate-pill">SOC 2</span>
+    </div>
+    <a href="index.html#contact" class="gate-cta">Get in touch →</a>
+    <a href="mailto:privacy@laikacampus.com" class="gate-email">privacy@laikacampus.com</a>
   </div>
-  <p class="header-note">Universities have real legal obligations when evaluating third-party software. Laika is built to meet those requirements, so your IT and procurement teams aren't the bottleneck.</p>
-</div>
+</main>
 
-<!-- ADA / WCAG -->
-<div class="compliance-section">
-  <div class="comp-left reveal">
-    <div class="comp-tag">Federal law</div>
-    <div class="comp-name">ADA / WCAG 2.1 AA</div>
-    <div class="comp-status status-ready">
-      <div class="status-dot"></div>
-      Compliant
-    </div>
-  </div>
-  <div class="comp-right reveal d1">
-    <div class="comp-headline">Accessible to every student and staff member, by law.</div>
-    <p class="comp-body">The DOJ finalized a rule under Title II of the ADA requiring all public universities to ensure their third-party software meets WCAG 2.1 Level AA standards by April 24, 2026. Universities are legally responsible for verifying that every vendor they deploy meets the standard. Laika is built to meet it.</p>
-    <div class="comp-details">
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Standard</div>
-        <div class="comp-detail-value">WCAG 2.1 Level AA, the DOJ-mandated benchmark for public universities</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Keyboard nav</div>
-        <div class="comp-detail-value">All features fully operable without a mouse</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Screen readers</div>
-        <div class="comp-detail-value">ARIA labels on all interactive elements, semantic HTML throughout</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Color contrast</div>
-        <div class="comp-detail-value">4.5:1 minimum ratio for all text, audited and passing</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Alt text</div>
-        <div class="comp-detail-value">Item photos auto-populated with AI-generated descriptions at upload</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Documentation</div>
-        <div class="comp-detail-value">Accessibility statement available at laikacampus.com/accessibility</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FERPA -->
-<div class="compliance-section">
-  <div class="comp-left reveal">
-    <div class="comp-tag">Student privacy</div>
-    <div class="comp-name">FERPA</div>
-    <div class="comp-status status-ready">
-      <div class="status-dot"></div>
-      Compliant
-    </div>
-  </div>
-  <div class="comp-right reveal d1">
-    <div class="comp-headline">Student data handled with care, and with the law in mind.</div>
-    <p class="comp-body">FERPA governs the privacy of student education records. When Laika collects a student's name, email, or ID number during a claim, that data is subject to FERPA protections. We collect only what's necessary to return a lost item, keep it isolated per university, and never share it across institutions.</p>
-    <div class="comp-details">
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Data collected</div>
-        <div class="comp-detail-value">Name, email, student ID, phone. Only what's needed to verify pickup.</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Data isolation</div>
-        <div class="comp-detail-value">Each university's data is fully scoped. Never visible across institutions.</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Purpose limitation</div>
-        <div class="comp-detail-value">Collected solely for lost item recovery. Not shared, sold, or used elsewhere.</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Retention</div>
-        <div class="comp-detail-value">Claim records retained per institution's policy. Deletion available on request.</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Documentation</div>
-        <div class="comp-detail-value">FERPA data handling statement and DPA template available on request — email <a href="mailto:privacy@laikacampus.com">privacy@laikacampus.com</a></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HECVAT -->
-<div class="compliance-section">
-  <div class="comp-left reveal">
-    <div class="comp-tag">Vendor assessment</div>
-    <div class="comp-name">HECVAT 4</div>
-    <div class="comp-status status-progress">
-      <div class="status-dot"></div>
-      In progress
-    </div>
-  </div>
-  <div class="comp-right reveal d1">
-    <div class="comp-headline">The standard questionnaire, completed before you ask.</div>
-    <p class="comp-body">Most vendors wait to be asked for a HECVAT. We're completing it proactively so when your IT team requests it, it's ready. Your procurement process doesn't stall.</p>
-    <div class="comp-details">
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Version</div>
-        <div class="comp-detail-value">HECVAT 4.1.5, released February 2025</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Sections covered</div>
-        <div class="comp-detail-value">Organization, Product, Infrastructure, IT Accessibility, AI, Privacy</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Infrastructure</div>
-        <div class="comp-detail-value">Answered using Vercel and Supabase SOC 2 documentation</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">AI section</div>
-        <div class="comp-detail-value">Answered using Anthropic's published responsible AI and data handling policies</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Availability</div>
-        <div class="comp-detail-value">Shared with any institution on request. Completed once, valid for all.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DATA SECURITY -->
-<div class="compliance-section" style="border-bottom:none;">
-  <div class="comp-left reveal">
-    <div class="comp-tag">Infrastructure</div>
-    <div class="comp-name">Data security</div>
-    <div class="comp-status status-ready">
-      <div class="status-dot"></div>
-      SOC 2 infrastructure
-    </div>
-  </div>
-  <div class="comp-right reveal d1">
-    <div class="comp-headline">Enterprise-grade infrastructure. No servers to manage.</div>
-    <p class="comp-body">Laika runs entirely on Vercel and Supabase, both SOC 2 Type II certified. We don't run servers ourselves, so your institution takes on no infrastructure risk. All data is encrypted. All university data is isolated.</p>
-    <div class="comp-details">
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Hosting</div>
-        <div class="comp-detail-value">Vercel (SOC 2 Type II), globally distributed</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Database</div>
-        <div class="comp-detail-value">Supabase on AWS us-east-1 (SOC 2 Type II), row-level security enabled</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Encryption</div>
-        <div class="comp-detail-value">All data encrypted at rest and in transit via TLS 1.2+</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Data isolation</div>
-        <div class="comp-detail-value">University-scoped access. No institution can see another's data.</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Incident response</div>
-        <div class="comp-detail-value">Documented plan. Affected universities notified within 72 hours of any breach.</div>
-      </div>
-      <div class="comp-detail-row">
-        <div class="comp-detail-label">Documentation</div>
-        <div class="comp-detail-value">DPA template, incident response plan, and infrastructure docs available on request — email <a href="mailto:privacy@laikacampus.com">privacy@laikacampus.com</a></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT STRIP -->
-<div class="contact-strip reveal">
-  <div class="cs-left">Questions about<br>compliance?</div>
-  <div class="cs-right">
-    <a href="/#contact" class="btn-light">Get in touch →</a>
-    <a href="mailto:privacy@laikacampus.com" class="cs-email">privacy@laikacampus.com</a>
-  </div>
-</div>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Laika</div>
   <div class="footer-copy">© 2026 Laika · laikacampus.com</div>
 </footer>
 
 <script src="motion.js"></script>
-
 </body>
 </html>
