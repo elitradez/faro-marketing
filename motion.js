@@ -160,18 +160,13 @@
     if (typeof Lenis === 'undefined') return;
 
     var lenis = new Lenis({
+      autoRaf: true,
       duration: 0.9,
       easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
       smoothWheel: true,
       wheelMultiplier: 0.85,
       touchMultiplier: 1.2
     });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
 
     /* Wire anchor links through Lenis */
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
