@@ -38,12 +38,13 @@ nav{
 }
 
 .nav-logo{
-  font-family:'Inter',sans-serif;
-  font-size:16px;font-weight:600;
-  color:var(--text);text-decoration:none;
-  display:flex;align-items:center;gap:8px;
+  text-decoration:none;
+  display:flex;align-items:center;
 }
-.nav-logo-mark{width:22px;height:22px;display:block;}
+.nav-logo-img{
+  height:30px;width:auto;display:block;
+  mix-blend-mode:multiply;
+}
 
 .nav-back{
   font-size:13px;font-weight:400;
@@ -148,8 +149,7 @@ footer{
 
 <nav>
   <a href="index.html" class="nav-logo">
-    <img class="nav-logo-mark" src="faro-lighthouse.png" alt="" aria-hidden="true">
-    Laika
+    <img class="nav-logo-img" src="laika-wordmark.png" alt="Laika">
   </a>
   <a href="index.html" class="nav-back">← Back to home</a>
 </nav>
