@@ -49,6 +49,20 @@
 .js-motion .d2 { transition-delay: calc(var(--motion-stagger) * 2); }
 .js-motion .d3 { transition-delay: calc(var(--motion-stagger) * 3); }
 
+/* ── Slide-from-left reveal — section kickers ───────────────────── */
+.js-motion .reveal-left {
+  opacity: 0;
+  transform: translateX(-14px);
+  transition:
+    opacity   var(--motion-dur) var(--motion-ease),
+    transform var(--motion-dur) var(--motion-ease);
+  will-change: opacity, transform;
+}
+.js-motion .reveal-left.on {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* ── Nav scroll state ───────────────────────────────────────────────── */
 nav { transition: box-shadow 0.3s ease, border-color 0.3s ease; }
 nav.scrolled {
@@ -77,7 +91,8 @@ nav.scrolled {
   }
 
   /* Reveal — visible immediately, no transform, at most a 150ms fade */
-  .js-motion .reveal {
+  .js-motion .reveal,
+  .js-motion .reveal-left {
     opacity: 1 !important;
     transform: none !important;
     transition: opacity 150ms ease !important;
