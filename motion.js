@@ -39,7 +39,7 @@
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -8px 0px' });
+    }, { threshold: 0.15, rootMargin: '0px 0px -16px 0px' });
 
     elements.forEach(function (el) { obs.observe(el); });
   }
@@ -134,25 +134,48 @@
   }
 
   /* ── Parallax ───────────────────────────────────────────────────────── */
-  /* Subtle vertical shift on the hero headline during scroll.           */
+  /* Subtle vertical shift on the hero headline only.                    */
   function initParallax() {
     if (reducedMotion) return;
     var heroH1 = document.getElementById('hero-h1');
     if (!heroH1) return;
     window.addEventListener('scroll', function () {
-      heroH1.style.transform = 'translateY(' + (window.scrollY * 0.18) + 'px)';
+      heroH1.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)';
     }, { passive: true });
   }
 
-  /* ── Smooth scroll ─────────────────────────────────────────────────── */
-  function initSmoothScroll() {
+  /* ── Nav scroll state ──────────────────────────────────────────────── */
+  function initNavScroll() {
+    var nav = document.querySelector('nav');
+    if (!nav) return;
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  }
+
+  /* ── Lenis smooth scroll ───────────────────────────────────────────── */
+  /* Matches Swarm's config: duration 0.9, exponential easing.          */
+  function initLenis() {
+    if (reducedMotion) return;
+    if (typeof Lenis === 'undefined') return;
+
+    var lenis = new Lenis({
+      autoRaf: true,
+      duration: 0.9,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1.2
+    });
+
+    /* Wire anchor links through Lenis */
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
         var id = a.getAttribute('href');
         var target = document.querySelector(id);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
+          lenis.scrollTo(target);
         }
       });
     });
@@ -164,6 +187,7 @@
     initStaggerGroups();
     initCounters();
     initParallax();
-    initSmoothScroll();
+    initNavScroll();
+    initLenis();
   });
 }());

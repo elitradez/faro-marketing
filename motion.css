@@ -11,12 +11,12 @@
 
 /* ── Motion tokens ──────────────────────────────────────────────────── */
 :root {
-  --motion-dur:         500ms;
-  --motion-dur-slow:    650ms;
+  --motion-dur:         400ms;
+  --motion-dur-slow:    600ms;
   --motion-dur-counter: 1200ms;
-  --motion-ease:        cubic-bezier(0.16, 1, 0.3, 1); /* ease-out-expo */
-  --motion-translate:   24px;
-  --motion-stagger:     80ms;
+  --motion-ease:        cubic-bezier(0.25, 0.1, 0.25, 1); /* standard ease */
+  --motion-translate:   20px;
+  --motion-stagger:     70ms;
 }
 
 /* ── Initial-load hero keyframe ─────────────────────────────────────── */
@@ -48,6 +48,13 @@
 .js-motion .d1 { transition-delay: calc(var(--motion-stagger) * 1); }
 .js-motion .d2 { transition-delay: calc(var(--motion-stagger) * 2); }
 .js-motion .d3 { transition-delay: calc(var(--motion-stagger) * 3); }
+
+/* ── Nav scroll state ───────────────────────────────────────────────── */
+nav { transition: box-shadow 0.3s ease, border-color 0.3s ease; }
+nav.scrolled {
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+  border-bottom-color: rgba(0,0,0,0.14);
+}
 
 /* ── Counter ─────────────────────────────────────────────────────────── */
 [data-counter] { display: inline-block; }
