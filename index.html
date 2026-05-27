@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laika · Lost & Found for Universities</title>
-<meta name="description" content="Laika is modern lost and found infrastructure for universities. Staff log items in 30 seconds. Students find their things online. Ownership verified at pickup.">
+<meta name="description" content="Laika is modern lost and found infrastructure. Staff log items in 30 seconds. People find their things online. Ownership verified at pickup.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="motion.css">
 <script>document.documentElement.classList.add('js-motion');</script>
@@ -151,8 +151,14 @@ nav{
 
 .hero-btns{
   display:flex;align-items:center;gap:12px;
-  margin-bottom:52px;
+  margin-bottom:20px;
   animation:laika-up 0.6s 0.37s var(--motion-ease) both;
+}
+.hero-trust{
+  font-size:12px;font-weight:400;
+  color:rgba(10,10,10,0.4);
+  letter-spacing:0.04em;
+  margin-bottom:40px;
 }
 .btn-primary{
   background:var(--accent);color:var(--bg);
@@ -718,12 +724,13 @@ footer{
   <div class="hero-text">
     <h1 id="hero-h1">Lost and found<br><em>that actually works.</em></h1>
     <p class="hero-sub">
-      Most campuses are still running lost and found on a cardboard box and a shared spreadsheet. Staff log items in seconds, students find their things online, and every pickup is verified.
+      Most organizations are still running lost and found on a cardboard box and a shared spreadsheet. Staff log items in seconds, people find their things online, and every pickup is verified.
     </p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Request a demo</a>
       <a href="#how" class="btn-secondary">See how it works</a>
     </div>
+    <div class="hero-trust reveal">In use at the University of Utah.</div>
     <div class="hero-stat">
       <div class="hero-stat-num" data-counter="30" data-suffix="s" data-duration="1200">30s</div>
       <div class="hero-stat-label">Average time for staff<br>to log a found item</div>
@@ -733,7 +740,7 @@ footer{
     <img
       class="hero-illustration"
       src="hero-illustration.png"
-      alt="Person returning a lost item to a student on a university campus"
+      alt="Person returning a lost item"
       loading="eager"
       decoding="async"
     >
@@ -756,7 +763,7 @@ footer{
             </svg>
           </div>
         </summary>
-        <div class="prob-bar-body">A general pattern wherever there is no real system in place. Not a campus-specific number.</div>
+        <div class="prob-bar-body">A general pattern wherever there is no real system in place.</div>
       </details>
 
       <details class="prob-bar reveal">
@@ -792,7 +799,7 @@ footer{
   <div class="mission-illus" aria-hidden="true">
     <img src="lost-wallet.png" alt="">
   </div>
-  <div class="mission-text">Every campus loses things. Most have no real system for getting them back. Laika is built for how universities actually work.</div>
+  <div class="mission-text">Every organization loses things. Most have no real system for getting them back. Laika is built for how you actually work.</div>
 </div>
 
 <!-- HOW IT WORKS -->
@@ -884,7 +891,7 @@ footer{
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
         <div class="feat-name">Portal integration</div>
-        <div class="feat-desc">Laika works standalone or integrates into your existing campus portal. Built to fit what you already have, not replace it. Setup takes minutes, not months.</div>
+        <div class="feat-desc">Laika works standalone or integrates into your existing systems. Built to fit what you already have, not replace it. Setup takes minutes, not months.</div>
       </div>
     </div>
   </div>
@@ -910,7 +917,7 @@ footer{
   </div>
   <div class="wrap">
     <div class="demo-cta-eyebrow reveal">Get started</div>
-    <div class="demo-cta-title reveal">Bring Laika<br>to your campus.</div>
+    <div class="demo-cta-title reveal">Bring Laika<br>to your team.</div>
     <p class="demo-cta-sub reveal">Schedule a demo or ask a question. We respond the same day.</p>
     <div class="demo-cta-btns reveal">
       <a href="#contact" class="btn-primary">Request a demo</a>
@@ -924,7 +931,7 @@ footer{
   <div class="contact-inner wrap">
     <div class="reveal">
       <div class="contact-label">Get in touch</div>
-      <div class="contact-title">Let's talk about your campus.</div>
+      <div class="contact-title">Let's talk.</div>
       <p class="contact-sub">Schedule a demo or ask a question. We respond the same day.</p>
     </div>
     <div class="reveal">
@@ -935,11 +942,11 @@ footer{
         </div>
         <div class="cf-row">
           <label class="cf-label" for="cf-email">Email</label>
-          <input class="cf-input" id="cf-email" name="email" type="email" placeholder="you@university.edu" required autocomplete="email">
+          <input class="cf-input" id="cf-email" name="email" type="email" placeholder="you@work.com" required autocomplete="email">
         </div>
         <div class="cf-row">
           <label class="cf-label" for="cf-msg">Message (optional)</label>
-          <textarea class="cf-input cf-textarea" id="cf-msg" name="message" placeholder="Tell us about your university and what you're looking for…" rows="3"></textarea>
+          <textarea class="cf-input cf-textarea" id="cf-msg" name="message" placeholder="Tell us about your organization and what you're looking for…" rows="3"></textarea>
         </div>
         <button type="submit" class="btn-primary cf-submit">Send message →</button>
         <p class="cf-status" id="cfStatus" aria-live="polite"></p>
@@ -960,7 +967,9 @@ footer{
       <a href="#how" class="footer-link">How it works</a>
       <a href="#features" class="footer-link">Features</a>
       <a href="compliance.html" class="footer-link">Compliance</a>
+      <a href="privacy.html" class="footer-link">Privacy</a>
       <a href="#contact" class="footer-link">Contact</a>
+      <a href="https://www.linkedin.com/company/laika-campus/?viewAsMember=true" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <div class="footer-copy">© 2026 Laika · laikacampus.com</div>
   </div>
