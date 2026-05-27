@@ -676,7 +676,6 @@ footer{
 </style>
 </head>
 <body>
-<div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav>
@@ -773,7 +772,7 @@ footer{
 </section>
 
 <!-- MISSION STRIP -->
-<div class="mission reveal-scale">
+<div class="mission reveal">
   <div class="mission-text">Every campus loses things. Most have no real system for getting them back. Laika is built for how universities actually work.</div>
 </div>
 
@@ -830,21 +829,21 @@ footer{
     </div>
 
     <div class="feat-grid" data-stagger="60">
-      <div class="feat-card reveal-scale">
+      <div class="feat-card reveal">
         <div class="feat-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         <div class="feat-name">AI photo intake</div>
         <div class="feat-desc">Photograph a found item and Laika instantly generates a name, description, and category. Staff confirm and save in under 30 seconds. No manual data entry.</div>
       </div>
-      <div class="feat-card reveal-scale">
+      <div class="feat-card reveal">
         <div class="feat-icon">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
         <div class="feat-name">Plain-language search</div>
         <div class="feat-desc">Students describe what they lost in their own words. Laika matches it against the live inventory with no exact match required. High-value items stay blurred until ownership is confirmed.</div>
       </div>
-      <div class="feat-card reveal-scale">
+      <div class="feat-card reveal">
         <div class="feat-icon">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
@@ -854,14 +853,14 @@ footer{
     </div>
 
     <div class="feat-grid-2" data-stagger="60">
-      <div class="feat-card reveal-scale">
+      <div class="feat-card reveal">
         <div class="feat-icon">
           <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
         <div class="feat-name">PIN-verified pickup</div>
         <div class="feat-desc">Every handover requires student ID and a PIN. Full audit trail from log to pickup.</div>
       </div>
-      <div class="feat-card reveal-scale">
+      <div class="feat-card reveal">
         <div class="feat-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
@@ -984,6 +983,7 @@ if (contactForm) {
   });
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="motion.js"></script>
 
 </body>

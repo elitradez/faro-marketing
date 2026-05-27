@@ -11,12 +11,12 @@
 
 /* ── Motion tokens ──────────────────────────────────────────────────── */
 :root {
-  --motion-dur:         500ms;
-  --motion-dur-slow:    650ms;
+  --motion-dur:         400ms;
+  --motion-dur-slow:    600ms;
   --motion-dur-counter: 1200ms;
-  --motion-ease:        cubic-bezier(0.16, 1, 0.3, 1); /* ease-out-expo */
-  --motion-translate:   24px;
-  --motion-stagger:     80ms;
+  --motion-ease:        cubic-bezier(0.25, 0.1, 0.25, 1); /* standard ease */
+  --motion-translate:   20px;
+  --motion-stagger:     70ms;
 }
 
 /* ── Initial-load hero keyframe ─────────────────────────────────────── */
@@ -49,29 +49,6 @@
 .js-motion .d2 { transition-delay: calc(var(--motion-stagger) * 2); }
 .js-motion .d3 { transition-delay: calc(var(--motion-stagger) * 3); }
 
-/* ── Scale-fade reveal — cards, mission, featured tiles ────────────── */
-.js-motion .reveal-scale {
-  opacity: 0;
-  transform: scale(0.97) translateY(10px);
-  transition:
-    opacity   var(--motion-dur) var(--motion-ease),
-    transform var(--motion-dur) var(--motion-ease);
-  will-change: opacity, transform;
-}
-.js-motion .reveal-scale.on {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-/* ── Scroll progress bar ────────────────────────────────────────────── */
-.scroll-progress {
-  position: fixed; top: 0; left: 0; z-index: 200;
-  height: 2px; width: 0%;
-  background: var(--text, #0a0a0a);
-  pointer-events: none;
-  transition: width 0.06s linear;
-}
-
 /* ── Nav scroll state ───────────────────────────────────────────────── */
 nav { transition: box-shadow 0.3s ease, border-color 0.3s ease; }
 nav.scrolled {
@@ -100,8 +77,7 @@ nav.scrolled {
   }
 
   /* Reveal — visible immediately, no transform, at most a 150ms fade */
-  .js-motion .reveal,
-  .js-motion .reveal-scale {
+  .js-motion .reveal {
     opacity: 1 !important;
     transform: none !important;
     transition: opacity 150ms ease !important;

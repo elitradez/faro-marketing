@@ -24,7 +24,7 @@
   /* ── Reveal ─────────────────────────────────────────────────────────── */
   /* One-shot: element is unobserved after first intersection.            */
   function initReveal() {
-    var elements = document.querySelectorAll('.reveal, .reveal-scale');
+    var elements = document.querySelectorAll('.reveal');
     if (!elements.length) return;
 
     if (reducedMotion) {
@@ -39,21 +39,21 @@
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -8px 0px' });
+    }, { threshold: 0.15, rootMargin: '0px 0px -16px 0px' });
 
     elements.forEach(function (el) { obs.observe(el); });
   }
 
   /* ── Stagger groups ─────────────────────────────────────────────────── */
   /* [data-stagger="N"] on a parent; N = ms between children (default 80)  */
-  /* Children must have class="reveal" or "reveal-scale" to participate.  */
+  /* Children must have class="reveal" to participate.                    */
   function initStaggerGroups() {
     var groups = document.querySelectorAll('[data-stagger]');
     if (!groups.length) return;
 
     if (reducedMotion) {
       groups.forEach(function (group) {
-        group.querySelectorAll('.reveal, .reveal-scale').forEach(function (el) {
+        group.querySelectorAll('.reveal').forEach(function (el) {
           el.classList.add('on');
         });
       });
@@ -61,7 +61,7 @@
     }
 
     groups.forEach(function (group) {
-      var children = Array.from(group.querySelectorAll('.reveal, .reveal-scale'));
+      var children = Array.from(group.querySelectorAll('.reveal'));
       var interval = parseInt(group.dataset.stagger || '80', 10);
 
       var obs = new IntersectionObserver(function (entries) {
@@ -134,15 +134,13 @@
   }
 
   /* ── Parallax ───────────────────────────────────────────────────────── */
-  /* Subtle vertical shift on the hero headline and illustration.        */
+  /* Subtle vertical shift on the hero headline only.                    */
   function initParallax() {
     if (reducedMotion) return;
-    var heroH1  = document.getElementById('hero-h1');
-    var heroImg = document.querySelector('.hero-img');
+    var heroH1 = document.getElementById('hero-h1');
+    if (!heroH1) return;
     window.addEventListener('scroll', function () {
-      var y = window.scrollY;
-      if (heroH1)  heroH1.style.transform  = 'translateY(' + (y * 0.18) + 'px)';
-      if (heroImg) heroImg.style.transform = 'translateY(' + (y * 0.08) + 'px)';
+      heroH1.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)';
     }, { passive: true });
   }
 
@@ -155,25 +153,34 @@
     }, { passive: true });
   }
 
-  /* ── Scroll progress bar ───────────────────────────────────────────── */
-  function initScrollProgress() {
-    var bar = document.querySelector('.scroll-progress');
-    if (!bar) return;
-    window.addEventListener('scroll', function () {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = (max > 0 ? Math.min(window.scrollY / max, 1) * 100 : 0) + '%';
-    }, { passive: true });
-  }
+  /* ── Lenis smooth scroll ───────────────────────────────────────────── */
+  /* Matches Swarm's config: duration 0.9, exponential easing.          */
+  function initLenis() {
+    if (reducedMotion) return;
+    if (typeof Lenis === 'undefined') return;
 
-  /* ── Smooth scroll ─────────────────────────────────────────────────── */
-  function initSmoothScroll() {
+    var lenis = new Lenis({
+      duration: 0.9,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1.2
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    /* Wire anchor links through Lenis */
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
         var id = a.getAttribute('href');
         var target = document.querySelector(id);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
+          lenis.scrollTo(target);
         }
       });
     });
@@ -186,7 +193,6 @@
     initCounters();
     initParallax();
     initNavScroll();
-    initScrollProgress();
-    initSmoothScroll();
+    initLenis();
   });
 }());
