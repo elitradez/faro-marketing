@@ -299,8 +299,25 @@ nav{
   border-bottom:1px solid var(--border);
   background:var(--bg3);
   text-align:center;
+  position:relative;overflow:hidden;
+}
+.mission-illus{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:780px;z-index:0;pointer-events:none;
+}
+.mission-illus::before{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:radial-gradient(ellipse 70% 70% at center, transparent 30%, var(--bg3) 80%);
+}
+.mission-illus img{
+  width:100%;height:auto;display:block;
+  mix-blend-mode:multiply;opacity:0.55;
 }
 .mission-text{
+  position:relative;z-index:1;
+}
   font-family:'Inter',sans-serif;
   font-size:clamp(28px,3.8vw,52px);
   font-weight:300;font-style:italic;
@@ -793,6 +810,9 @@ footer{
 
 <!-- MISSION STRIP -->
 <div class="mission reveal">
+  <div class="mission-illus" aria-hidden="true">
+    <img src="lost-wallet.png" alt="">
+  </div>
   <div class="mission-text">Every campus loses things. Most have no real system for getting them back. Laika is built for how universities actually work.</div>
 </div>
 
