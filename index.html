@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laika · Lost & Found for Universities</title>
 <meta name="description" content="Laika is modern lost and found infrastructure. Staff log items in 30 seconds. People find their things online. Ownership verified at pickup.">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="motion.css">
 <script>document.documentElement.classList.add('js-motion');</script>
 <style>
@@ -32,7 +33,7 @@ html{scroll-behavior:auto}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'Inter',-apple-system,sans-serif;
+  font-family:'Satoshi',-apple-system,sans-serif;
   font-size:16px;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
@@ -132,7 +133,7 @@ nav{
 }
 
 .hero h1{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:clamp(52px,5.4vw,78px);
   font-weight:300;line-height:1.0;
   letter-spacing:-0.03em;
@@ -187,7 +188,7 @@ nav{
   animation:laika-up 0.6s 0.46s var(--motion-ease) both;
 }
 .hero-stat-num{
-  font-family:'Cormorant Garamond',serif;
+  font-family:'Satoshi',sans-serif;
   font-size:52px;font-weight:300;font-style:italic;
   color:var(--text);line-height:0.9;
 }
@@ -277,7 +278,7 @@ nav{
 .prob-bar-head::marker{display:none;}
 .prob-bar-hl{
   flex:1;display:flex;align-items:center;gap:24px;
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:clamp(20px,2.2vw,28px);
   font-weight:300;color:var(--text);line-height:1.2;
 }
@@ -323,7 +324,7 @@ nav{
 }
 .mission-text{
   position:relative;z-index:1;
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:clamp(32px,4.2vw,60px);
   font-weight:300;font-style:italic;
   color:var(--text);
@@ -343,12 +344,12 @@ nav{
   margin-bottom:60px;
 }
 .how-title{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:clamp(34px,3.8vw,50px);
   font-weight:300;color:var(--text);letter-spacing:-0.02em;
 }
 .how-subtitle{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:15px;font-style:italic;
   font-weight:300;color:var(--text3);
 }
@@ -365,13 +366,13 @@ nav{
   border-bottom:1px solid var(--border);
 }
 .step-n{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:13px;font-style:italic;font-weight:300;
   color:var(--text3);align-self:start;padding-top:4px;
 }
 .step-info{padding-right:40px;}
 .step-name{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:22px;font-weight:400;
   color:var(--text);letter-spacing:-0.01em;
   line-height:1.25;margin-bottom:12px;
@@ -415,7 +416,7 @@ nav{
   margin-bottom:60px;
 }
 .feat-title{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:clamp(34px,3.8vw,50px);
   font-weight:300;color:var(--text);
   letter-spacing:-0.02em;margin-bottom:14px;
@@ -451,7 +452,7 @@ nav{
 }
 .feat-icon svg{width:16px;height:16px;stroke:var(--text2);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
 .feat-name{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:20px;font-weight:400;
   color:var(--text);letter-spacing:-0.01em;
   margin-bottom:9px;
@@ -524,7 +525,7 @@ nav{
   color:var(--text3);margin-bottom:20px;
 }
 .demo-cta-title{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:clamp(40px,5vw,66px);
   font-weight:300;font-style:italic;
   color:var(--text);line-height:1.1;
@@ -557,7 +558,7 @@ nav{
   color:var(--text3);margin-bottom:16px;
 }
 .contact-title{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:clamp(34px,4vw,52px);
   font-weight:300;font-style:italic;
   color:var(--text);line-height:1.06;
@@ -627,8 +628,8 @@ nav{
   font-size:13px;font-weight:300;
   color:var(--text2);margin:0;min-height:16px;text-align:center;
 }
-.cf-status.cf-ok{color:#4ade80;}
-.cf-status.cf-err{color:#f87171;}
+.cf-status.cf-ok{color:var(--text);}
+.cf-status.cf-err{color:var(--text);}
 .contact-email{
   display:block;text-align:center;
   font-size:13px;font-weight:300;
@@ -651,7 +652,7 @@ footer{
 .footer-logo{display:flex;align-items:center;gap:9px;}
 .footer-logo-mark{height:28px;width:auto;opacity:0.45;}
 .footer-logo-text{
-  font-family:'Inter',sans-serif;
+  font-family:'Satoshi',sans-serif;
   font-size:15px;font-weight:300;
   color:var(--text3);
   letter-spacing:0.08em;text-transform:uppercase;
