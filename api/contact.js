@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
     console.error('[contact] RESEND_API_KEY not set');
     return res.status(500).json({ error: 'Server configuration error' });
@@ -40,8 +40,10 @@ export default async function handler(req, res) {
   });
 
   if (!response.ok) {
-    const err = await response.text();
-    console.error('[contact] Resend error:', response.status, err);
+    const body = await response.text();
+    let parsed;
+    try { parsed = JSON.parse(body); } catch { parsed = body; }
+    console.error('[contact] Resend error:', response.status, parsed);
     return res.status(502).json({ error: 'Failed to send email' });
   }
 
